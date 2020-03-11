@@ -1,0 +1,159 @@
+{
+    "E:/media/picture/img5.jpg": {
+        "type": ".jpg",
+        "name": "img10.jpg",
+        "tags": [
+            "all",
+            "picture"
+        ]
+    },
+    "E:/media/picture/img6.jpg": {
+        "type": ".jpg",
+        "name": "img10.jpg",
+        "tags": [
+            "all",
+            "picture"
+        ]
+    },
+    "E:/media/picture/img7.jpg": {
+        "type": ".jpg",
+        "name": "img11.jpg",
+        "tags": [
+            "all",
+            "picture"
+        ]
+    },
+    "E:/media/picture/img9.jpg": {
+        "type": ".jpg",
+        "name": "img10.jpg",
+        "tags": [
+            "all",
+            "picture"
+        ]
+    },
+    "E:/media/picture/img10.jpg": {
+        "type": ".jpg",
+        "name": "img10.jpg",
+        "tags": [
+            "all",
+            "picture"
+        ]
+    },
+    "E:/media/picture/img11.jpg": {
+        "type": ".jpg",
+        "name": "img11.jpg",
+        "tags": [
+            "all",
+            "picture"
+        ]
+    },
+    "E:/media/picture/iimg9.jpg": {
+        "type": ".jpg",
+        "name": "img10.jpg",
+        "tags": [
+            "all",
+            "picture"
+        ]
+    },
+    "E:/media/picture/img1.jpg": {
+        "type": ".jpg",
+        "name": "img10.jpg",
+        "tags": [
+            "all",
+            "picture"
+        ]
+    },
+    "E:/media/picture/img2.jpg": {
+        "type": ".jpg",
+        "name": "img10.jpg",
+        "tags": [
+            "all",
+            "picture"
+        ]
+    },
+    "E:/media/picture/img3.jpg": {
+        "type": ".jpg",
+        "name": "img11.jpg",
+        "tags": [
+            "all",
+            "picture"
+        ]
+    },
+    "E:/media/picture/img4.jpg": {
+        "type": ".jpg",
+        "name": "img10.jpg",
+        "tags": [
+            "all",
+            "picture"
+        ]
+    },
+    "E:/media/picture/img8.jpg": {
+        "type": ".jpg",
+        "name": "img10.jpg",
+        "tags": [
+            "all",
+            "picture"
+        ]
+    },
+    "E:/media/obj/cone.obj": {
+        "type": ".obj",
+        "name": "cone.obj",
+        "tags": [
+            "all",
+            "model"
+        ]
+    },
+    "E:/media/obj/cone2.obj": {
+        "type": ".obj",
+        "name": "cone2.obj",
+        "tags": [
+            "all",
+            "model",
+            "tree"
+        ]
+    },
+    "E:/media/obj/cylinder.obj": {
+        "type": ".obj",
+        "name": "cylinder.obj",
+        "tags": [
+            "all",
+            "model",
+            "tree"
+        ]
+    },
+    "E:/media/obj/plane.obj": {
+        "type": ".obj",
+        "name": "plane.obj",
+        "tags": [
+            "all",
+            "model",
+            "rock"
+        ]
+    },
+    "E:/media/obj/sphere2.obj": {
+        "type": ".obj",
+        "name": "sphere2.obj",
+        "tags": [
+            "all",
+            "model",
+            "tree"
+        ]
+    },
+    "E:/media/obj/box.obj": {
+        "type": ".obj",
+        "name": "box.obj",
+        "tags": [
+            "all",
+            "model"
+        ]
+    },
+    "E:/media/obj/cylinder2.obj": {
+        "type": ".obj",
+        "name": "cylinder2.obj",
+        "tags": [
+            "all",
+            "model",
+            "tree"
+        ]
+    }
+}
