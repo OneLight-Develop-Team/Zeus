@@ -1,32 +1,12 @@
 {
-    "E:/media/wallpaper/background-beautiful-blossom-calm-waters-268533.jpg": {
-        "path": "E:/media/wallpaper/background-beautiful-blossom-calm-waters-268533.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\background-beautiful-blossom-calm-waters-268533.jpg", 
-        "name": "background-beautiful-blossom-calm-waters-268533.jpg"
-    }, 
-    "E:/media/wallpaper/snow-covered-mountain-2915997.jpg": {
-        "path": "E:/media/wallpaper/snow-covered-mountain-2915997.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\snow-covered-mountain-2915997.jpg", 
-        "name": "snow-covered-mountain-2915997.jpg"
-    }, 
     "E:/media/picture/img9.jpg": {
         "path": "E:/media/picture/img9.jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img9.jpg", 
         "type": ".jpg", 
         "name": "img9.jpg", 
         "tags": [
-            "edff", 
-            "gh"
+            "UV", 
+            "Peo", 
+            "UVs"
         ]
     }, 
     "E:/media/obj/cone.obj": {
@@ -34,148 +14,64 @@
         "type": ".obj", 
         "name": "cone.obj", 
         "tags": [
-            "UV", 
-            "People", 
-            "Peo", 
+            "Rock", 
+            "OBJ", 
             "MODEL"
         ]
     }, 
     "E:/media/picture/img5.jpg": {
         "path": "E:/media/picture/img5.jpg", 
-        "tags": [
-            "UV", 
-            "Texture", 
-            "OBJ", 
-            "UVs"
-        ], 
         "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img5.jpg", 
-        "name": "img5.jpg"
+        "name": "img5.jpg", 
+        "tags": [
+            "UV"
+        ]
     }, 
     "E:/media/picture/img18.jpg": {
         "path": "E:/media/picture/img18.jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img18.jpg", 
         "type": ".jpg", 
         "name": "img18.jpg", 
         "tags": [
-            "edff", 
-            "gh"
+            "UV", 
+            "Peo", 
+            "UVs"
         ]
-    }, 
-    "E:/media/wallpaper/beautiful-cold-conifer-environment-552792.jpg": {
-        "path": "E:/media/wallpaper/beautiful-cold-conifer-environment-552792.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\beautiful-cold-conifer-environment-552792.jpg", 
-        "name": "beautiful-cold-conifer-environment-552792.jpg"
     }, 
     "E:/media/picture/img11.jpg": {
         "path": "E:/media/picture/img11.jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img11.jpg", 
         "type": ".jpg", 
         "name": "img11.jpg", 
         "tags": [
-            "edff", 
-            "gh"
+            "UV", 
+            "Peo", 
+            "UVs"
         ]
-    }, 
-    "E:/media/wallpaper/background-beautiful-clouds-cloudscape-552789.jpg": {
-        "path": "E:/media/wallpaper/background-beautiful-clouds-cloudscape-552789.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\background-beautiful-clouds-cloudscape-552789.jpg", 
-        "name": "background-beautiful-clouds-cloudscape-552789.jpg"
     }, 
     "E:/media/picture/img6.jpg": {
         "path": "E:/media/picture/img6.jpg", 
-        "tags": [
-            "UV", 
-            "Texture", 
-            "OBJ", 
-            "UVs"
-        ], 
         "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img6.jpg", 
-        "name": "img6.jpg"
+        "name": "img6.jpg", 
+        "tags": [
+            "Water", 
+            "Hair", 
+            "Texture", 
+            "People"
+        ]
     }, 
     "E:/media/picture/img12.jpg": {
         "path": "E:/media/picture/img12.jpg", 
+        "type": ".jpg", 
+        "name": "img12.jpg", 
+        "tags": []
+    }, 
+    "E:/media/picture/img7.jpg": {
+        "path": "E:/media/picture/img7.jpg", 
+        "type": ".jpg", 
+        "name": "img7.jpg", 
         "tags": [
             "UV", 
-            "Texture", 
-            "OBJ", 
+            "Peo", 
             "UVs"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img12.jpg", 
-        "name": "img12.jpg"
-    }, 
-    "E:/media/wallpaper/blue-sky-clear-sky-cold-fog-346529.jpg": {
-        "path": "E:/media/wallpaper/blue-sky-clear-sky-cold-fog-346529.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\blue-sky-clear-sky-cold-fog-346529.jpg", 
-        "name": "blue-sky-clear-sky-cold-fog-346529.jpg"
-    }, 
-    "E:/media/picture/img2.jpg": {
-        "path": "E:/media/picture/img2.jpg", 
-        "tags": [
-            "UV", 
-            "Texture", 
-            "OBJ", 
-            "UVs"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img2.jpg", 
-        "name": "img2.jpg"
-    }, 
-    "E:/media/wallpaper/architectural-design-architecture-buildings-city-374811.jpg": {
-        "path": "E:/media/wallpaper/architectural-design-architecture-buildings-city-374811.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\architectural-design-architecture-buildings-city-374811.jpg", 
-        "name": "architectural-design-architecture-buildings-city-374811.jpg"
-    }, 
-    "E:/media/wallpaper/four-champagne-flutes-with-assorted-color-liquids-1028637.jpg": {
-        "path": "E:/media/wallpaper/four-champagne-flutes-with-assorted-color-liquids-1028637.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\four-champagne-flutes-with-assorted-color-liquids-1028637.jpg", 
-        "name": "four-champagne-flutes-with-assorted-color-liquids-1028637.jpg"
-    }, 
-    "E:/media/wallpaper/white-architectural-structure-1022928.jpg": {
-        "path": "E:/media/wallpaper/white-architectural-structure-1022928.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\white-architectural-structure-1022928.jpg", 
-        "name": "white-architectural-structure-1022928.jpg"
-    }, 
-    "E:/media/picture/img19.jpg": {
-        "path": "E:/media/picture/img19.jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img19.jpg", 
-        "type": ".jpg", 
-        "name": "img19.jpg", 
-        "tags": [
-            "edff", 
-            "gh"
         ]
     }, 
     "E:/media/obj/box.obj": {
@@ -183,309 +79,160 @@
         "type": ".obj", 
         "name": "box.obj", 
         "tags": [
-            "UV", 
-            "People", 
-            "Peo", 
+            "Rock", 
+            "OBJ", 
             "MODEL"
         ]
     }, 
     "E:/media/picture/img15.jpg": {
         "path": "E:/media/picture/img15.jpg", 
+        "type": ".jpg", 
+        "name": "img15.jpg", 
         "tags": [
             "UV", 
-            "Texture", 
-            "OBJ", 
-            "UVs"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img15.jpg", 
-        "name": "img15.jpg"
-    }, 
-    "E:/media/wallpaper/red-and-white-lighthouse-on-land-946343.jpg": {
-        "path": "E:/media/wallpaper/red-and-white-lighthouse-on-land-946343.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\red-and-white-lighthouse-on-land-946343.jpg", 
-        "name": "red-and-white-lighthouse-on-land-946343.jpg"
-    }, 
-    "E:/media/wallpaper/photo-of-person-walking-on-deserted-island-934718.jpg": {
-        "path": "E:/media/wallpaper/photo-of-person-walking-on-deserted-island-934718.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\photo-of-person-walking-on-deserted-island-934718.jpg", 
-        "name": "photo-of-person-walking-on-deserted-island-934718.jpg"
-    }, 
-    "E:/media/obj/cone2.obj": {
-        "path": "E:/media/obj/cone2.obj", 
-        "type": ".obj", 
-        "name": "cone2.obj", 
-        "tags": [
-            "UV", 
-            "People", 
             "Peo", 
-            "MODEL"
+            "UVs"
         ]
     }, 
-    "E:/media/wallpaper/mist-misty-fog-foggy-7919.jpg": {
-        "path": "E:/media/wallpaper/mist-misty-fog-foggy-7919.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
+    "E:/media/picture/img14.jpg": {
+        "path": "E:/media/picture/img14.jpg", 
         "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\mist-misty-fog-foggy-7919.jpg", 
-        "name": "mist-misty-fog-foggy-7919.jpg"
-    }, 
-    "E:/media/picture/img4.jpg": {
-        "path": "E:/media/picture/img4.jpg", 
+        "name": "img14.jpg", 
         "tags": [
             "UV", 
-            "Texture", 
-            "OBJ", 
+            "Peo", 
             "UVs"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img4.jpg", 
-        "name": "img4.jpg"
+        ]
     }, 
     "E:/media/obj/sphere2.obj": {
         "path": "E:/media/obj/sphere2.obj", 
         "type": ".obj", 
         "name": "sphere2.obj", 
         "tags": [
-            "UV", 
-            "People", 
-            "Peo", 
+            "Rock", 
+            "OBJ", 
             "MODEL"
         ]
     }, 
     "E:/media/picture/img3.jpg": {
         "path": "E:/media/picture/img3.jpg", 
+        "type": ".jpg", 
+        "name": "img3.jpg", 
         "tags": [
-            "UV", 
+            "Water", 
+            "Hair", 
             "Texture", 
-            "OBJ", 
-            "UVs"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img3.jpg", 
-        "name": "img3.jpg"
-    }, 
-    "E:/media/wallpaper/snow-top-mountain-under-clear-sky-1054218.jpg": {
-        "path": "E:/media/wallpaper/snow-top-mountain-under-clear-sky-1054218.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\snow-top-mountain-under-clear-sky-1054218.jpg", 
-        "name": "snow-top-mountain-under-clear-sky-1054218.jpg"
-    }, 
-    "E:/media/picture/img16.jpg": {
-        "path": "E:/media/picture/img16.jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img16.jpg", 
-        "type": ".jpg", 
-        "name": "img16.jpg", 
-        "tags": [
-            "edff", 
-            "gh"
+            "People"
         ]
     }, 
-    "E:/media/wallpaper/scenic-photo-of-lake-surrounded-by-trees-1903702.jpg": {
-        "path": "E:/media/wallpaper/scenic-photo-of-lake-surrounded-by-trees-1903702.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
+    "E:/media/picture/img8.jpg": {
+        "path": "E:/media/picture/img8.jpg", 
         "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\scenic-photo-of-lake-surrounded-by-trees-1903702.jpg", 
-        "name": "scenic-photo-of-lake-surrounded-by-trees-1903702.jpg"
+        "name": "img8.jpg", 
+        "tags": [
+            "UV", 
+            "Peo", 
+            "UVs"
+        ]
     }, 
-    "E:/media/wallpaper/light-landscape-nature-red-33041.jpg": {
-        "path": "E:/media/wallpaper/light-landscape-nature-red-33041.jpg", 
+    "E:/media/obj/plane.obj": {
+        "path": "E:/media/obj/plane.obj", 
+        "type": ".obj", 
+        "name": "plane.obj", 
         "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\light-landscape-nature-red-33041.jpg", 
-        "name": "light-landscape-nature-red-33041.jpg"
+            "Rock", 
+            "OBJ", 
+            "MODEL"
+        ]
+    }, 
+    "E:/media/obj/cylinder2.obj": {
+        "path": "E:/media/obj/cylinder2.obj", 
+        "type": ".obj", 
+        "name": "cylinder2.obj", 
+        "tags": [
+            "Rock", 
+            "OBJ", 
+            "MODEL"
+        ]
     }, 
     "E:/media/picture/img10.jpg": {
         "path": "E:/media/picture/img10.jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img10.jpg", 
         "type": ".jpg", 
         "name": "img10.jpg", 
         "tags": [
-            "edff", 
-            "gh"
+            "UV", 
+            "Peo", 
+            "UVs"
         ]
     }, 
     "E:/media/picture/iimg9.jpg": {
         "path": "E:/media/picture/iimg9.jpg", 
+        "type": ".jpg", 
+        "name": "iimg9.jpg", 
+        "tags": []
+    }, 
+    "E:/media/picture/img19.jpg": {
+        "path": "E:/media/picture/img19.jpg", 
+        "type": ".jpg", 
+        "name": "img19.jpg", 
         "tags": [
             "UV", 
-            "Texture", 
-            "OBJ", 
+            "Peo", 
             "UVs"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\iimg9.jpg", 
-        "name": "iimg9.jpg"
+        ]
     }, 
-    "E:/media/picture/img7.jpg": {
-        "path": "E:/media/picture/img7.jpg", 
+    "E:/media/obj/cone2.obj": {
+        "path": "E:/media/obj/cone2.obj", 
+        "type": ".obj", 
+        "name": "cone2.obj", 
         "tags": [
-            "UV", 
-            "Texture", 
+            "Rock", 
             "OBJ", 
-            "UVs"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img7.jpg", 
-        "name": "img7.jpg"
+            "MODEL"
+        ]
     }, 
-    "E:/media/picture/img14.jpg": {
-        "path": "E:/media/picture/img14.jpg", 
+    "E:/media/picture/img4.jpg": {
+        "path": "E:/media/picture/img4.jpg", 
+        "type": ".jpg", 
+        "name": "img4.jpg", 
+        "tags": []
+    }, 
+    "E:/media/picture/img2.jpg": {
+        "path": "E:/media/picture/img2.jpg", 
+        "type": ".jpg", 
+        "name": "img2.jpg", 
         "tags": [
-            "UV", 
+            "Water", 
+            "Hair", 
             "Texture", 
-            "OBJ", 
-            "UVs"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img14.jpg", 
-        "name": "img14.jpg"
-    }, 
-    "E:/media/wallpaper/snow-coated-rocky-mountains-772803.jpg": {
-        "path": "E:/media/wallpaper/snow-coated-rocky-mountains-772803.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\snow-coated-rocky-mountains-772803.jpg", 
-        "name": "snow-coated-rocky-mountains-772803.jpg"
-    }, 
-    "E:/media/wallpaper/alps-beautiful-blue-cold-547115.jpg": {
-        "path": "E:/media/wallpaper/alps-beautiful-blue-cold-547115.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\alps-beautiful-blue-cold-547115.jpg", 
-        "name": "alps-beautiful-blue-cold-547115.jpg"
-    }, 
-    "E:/media/wallpaper/calm-body-of-water-1363876.jpg": {
-        "path": "E:/media/wallpaper/calm-body-of-water-1363876.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\calm-body-of-water-1363876.jpg", 
-        "name": "calm-body-of-water-1363876.jpg"
-    }, 
-    "E:/media/wallpaper/high-rise-buildings-1139556.jpg": {
-        "path": "E:/media/wallpaper/high-rise-buildings-1139556.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\high-rise-buildings-1139556.jpg", 
-        "name": "high-rise-buildings-1139556.jpg"
-    }, 
-    "E:/media/wallpaper/pexels-photo-459225.jpeg": {
-        "path": "E:/media/wallpaper/pexels-photo-459225.jpeg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpeg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\pexels-photo-459225.jpg", 
-        "name": "pexels-photo-459225.jpeg"
-    }, 
-    "E:/media/wallpaper/brown-snowy-mountain-1054201.jpg": {
-        "path": "E:/media/wallpaper/brown-snowy-mountain-1054201.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\brown-snowy-mountain-1054201.jpg", 
-        "name": "brown-snowy-mountain-1054201.jpg"
-    }, 
-    "E:/media/wallpaper/scenic-view-of-city-under-cloudy-sky-2627063.jpg": {
-        "path": "E:/media/wallpaper/scenic-view-of-city-under-cloudy-sky-2627063.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\scenic-view-of-city-under-cloudy-sky-2627063.jpg", 
-        "name": "scenic-view-of-city-under-cloudy-sky-2627063.jpg"
-    }, 
-    "E:/media/wallpaper/time-lapse-photo-of-northern-lights-1933316.jpg": {
-        "path": "E:/media/wallpaper/time-lapse-photo-of-northern-lights-1933316.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\time-lapse-photo-of-northern-lights-1933316.jpg", 
-        "name": "time-lapse-photo-of-northern-lights-1933316.jpg"
-    }, 
-    "E:/media/wallpaper/lake-1110656.jpg": {
-        "path": "E:/media/wallpaper/lake-1110656.jpg", 
-        "tags": [
-            "Tree", 
-            "Hair"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\lake-1110656.jpg", 
-        "name": "lake-1110656.jpg"
+            "People"
+        ]
     }, 
     "E:/media/picture/img1.jpg": {
         "path": "E:/media/picture/img1.jpg", 
-        "tags": [
-            "UV", 
-            "Texture", 
-            "OBJ", 
-            "UVs"
-        ], 
         "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img1.jpg", 
-        "name": "img1.jpg"
+        "name": "img1.jpg", 
+        "tags": [
+            "UV"
+        ]
     }, 
-    "E:/media/picture/img8.jpg": {
-        "path": "E:/media/picture/img8.jpg", 
+    "E:/media/picture/img16.jpg": {
+        "path": "E:/media/picture/img16.jpg", 
+        "type": ".jpg", 
+        "name": "img16.jpg", 
         "tags": [
             "UV", 
-            "Texture", 
-            "OBJ", 
+            "Peo", 
             "UVs"
-        ], 
-        "type": ".jpg", 
-        "thumbnail": "C:\\Users\\huangPeiXin\\Documents\\houdini17.5\\python2.7libs\\Zeus\\res\\image\\thumbnail\\img8.jpg", 
-        "name": "img8.jpg"
+        ]
     }, 
     "E:/media/obj/cylinder.obj": {
         "path": "E:/media/obj/cylinder.obj", 
         "type": ".obj", 
         "name": "cylinder.obj", 
         "tags": [
-            "UV", 
-            "People", 
             "Peo", 
-            "MODEL"
+            "Rock"
         ]
     }
 }
