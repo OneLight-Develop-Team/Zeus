@@ -32,7 +32,6 @@
        <string>搜索</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="comboBox"/>
     </widget>
    </item>
    <item row="1" column="0">

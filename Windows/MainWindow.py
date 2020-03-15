@@ -10,15 +10,18 @@ import  User
 from Parmers import ParmerPanel
 from Node import NodePanel
 import  View
-from Tab import TabWidget
+import Tag
+
+from Zeus.settings.Setting import Data
+import os
 
 reload(User)
 reload(View)
 reload(FileTree)
 reload(Center)
+reload(Tag)
 
-from Zeus.settings.Setting import Data
-import os
+
 
 #获取当前文件所在路径
 current_path = os.path.dirname(os.path.abspath(__file__))
@@ -272,8 +275,15 @@ class MainController():
             self.paths = dialog.selectedFiles()
 
             # 创建标签选择窗口
-            self.tabwiget = TabWidget(self.paths)
-            self.tabwiget.show()
+            self.tagWidget = Tag.TagWidget(self.paths)
+            self.tagWidget.show()
+
+            if self.tagWidget.close():
+                tags_add = self.tagWidget.getNewtag() # 获取新添加的标签
+                self.setNewtag(tags_add)
+
+                
+                
 
     # 设置窗口之间的信号连接
     def setWindowsConnect(self):
@@ -283,6 +293,9 @@ class MainController():
         if self.viewPanel != None: # 设置中心窗口的按钮点击连接到视图窗口显示
             self.centerWindow.load_view_signal.connect(self.viewPanel.setView)
 
+
+    def setNewtag(self,tags):
+        print(tags)
 
 Col = MainController()
 

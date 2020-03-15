@@ -78,9 +78,12 @@ class FileTreeWindow(QDockWidget):
         
 
 
-
-    def addBtn(self):
-        pass
+    # 添加新建标签
+    def addBtn(self,tags):
+        for tag in tags:
+            btn = QPushButton(tag)
+            btn.clicked.connect(partial(self.sendLoadCenter,tag))
+            self.widget.layout().addWidget(btn)
   
 
         
