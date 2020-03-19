@@ -1,8 +1,8 @@
 ﻿# using utf-8
 
-from PySide2.QtWidgets import QWidget, QDockWidget,QVBoxLayout,QPushButton,QLineEdit,QLabel,QComboBox
-from PySide2.QtUiTools import QUiLoader
-from PySide2.QtCore import Qt
+from Qt.QtWidgets import QWidget, QDockWidget,QVBoxLayout,QPushButton,QLineEdit,QLabel,QComboBox
+from Qt.QtCompat import loadUi
+from Qt.QtCore import Qt
 import os
 
 import sys
@@ -13,8 +13,10 @@ sys.setdefaultencoding('utf8')
 current_path = os.path.dirname(os.path.abspath(__file__))
 
 file_path = os.path.dirname(current_path)
-
-from Zeus.settings.Setting import Data
+try:
+    from Zeus.settings.Setting import Data
+except:
+    from settings.Setting import Data
 class UserPanel(QDockWidget):
     """用户面板"""
     def __init__(self):
@@ -37,8 +39,8 @@ class UserPanel(QDockWidget):
         
 
         #加载ui,并设置ui界面
-        loader = QUiLoader()
-        self.ui = loader.load(file_path + "\\res\\UI\\UserLogin.ui")
+        # loader = QUiLoader()
+        self.ui = loadUi(file_path + "\\res\\UI\\UserLogin.ui")
         self.ui.setParent(self.widget)
 
         self.widget.setLayout(QVBoxLayout())
@@ -59,7 +61,7 @@ class UserPanel(QDockWidget):
 
         
 
-        self.setWindowTitle("用户界面")
+        self.setWindowTitle(u"用户界面")
 
     # 登录按钮按下,加载登录界面
     def on_sigin_in_click(self):

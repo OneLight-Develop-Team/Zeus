@@ -1,9 +1,12 @@
 ﻿# using utf-8
 
-from PySide2.QtWidgets import QWidget, QDockWidget,QPushButton,QHBoxLayout
-from PySide2.QtCore import Qt
+from Qt.QtWidgets import QWidget, QDockWidget,QPushButton,QHBoxLayout
+from Qt.QtCore import Qt
 
-from Zeus.settings.Setting import Data
+try:
+    from Zeus.settings.Setting import Data
+except:
+    from settings.Setting import Data
 class NodePanel(QDockWidget):
     """节点视图"""
     def __init__(self):
@@ -23,4 +26,4 @@ class NodePanel(QDockWidget):
         self.widget.setMinimumSize(Data.getWindowWidth()/4,Data.getWindowHeight()/4)
 
         self.setWidget(self.widget)
-        self.setWindowTitle("节点编辑器")
+        self.setWindowTitle(u"节点编辑器")

@@ -1,6 +1,6 @@
 ﻿# <-- coding utf-8 -->
 
-from PySide2.QtWidgets import QApplication
+from Qt.QtWidgets import QApplication
 import json,os
 
 current_path = os.path.dirname(os.path.abspath(__file__))

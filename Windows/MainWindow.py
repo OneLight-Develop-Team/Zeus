@@ -1,23 +1,25 @@
 ﻿# <-- coding utf-8 -->
 
-from PySide2.QtWidgets import QVBoxLayout,QWidget,QMenu,QMainWindow,QDockWidget,QFileDialog
-from PySide2.QtUiTools import QUiLoader
-from PySide2.QtCore import Qt
+from Qt.QtWidgets import QVBoxLayout,QWidget,QMenu,QMainWindow,QDockWidget,QFileDialog
+from Qt.QtCompat import loadUi
+from Qt.QtCore import Qt
 
 import Center
-import FileTree
 import  User
 from Parmers import ParmerPanel
 from Node import NodePanel
 import  View
 import Tag
 
-from Zeus.settings.Setting import Data
+try:
+    from Zeus.settings.Setting import Data
+except:
+    from settings.Setting import Data
+
 import os
 
 reload(User)
 reload(View)
-reload(FileTree)
 reload(Center)
 reload(Tag)
 
@@ -40,12 +42,12 @@ class MainView(QWidget):
     def setupUI(self):
        
         #加载ui,并设置ui界面
-        loader = QUiLoader()
-        self.ui = loader.load(file_path + "\\res\\UI\\MainWindow.ui")
+        # loader = QUiLoader()
+        self.ui = loadUi(file_path + "\\res\\UI\\MainWindow.ui")
         self.ui.setParent(self)
         
         #设置窗口名称
-        self.setWindowTitle("资产浏览器")
+        self.setWindowTitle(u"资产浏览器")
 
         #设置布局
         self.setLayout(QVBoxLayout())
@@ -60,7 +62,7 @@ class MainView(QWidget):
         self.menu_window = self.ui.findChild(QMenu, "menu_window")
         self.menu_file = self.ui.findChild(QMenu, "menu_file")
         
-        self.action_file_panel = self.menu_window.addAction(u"大纲视图")
+
         self.action_param_panel = self.menu_window.addAction(u"参数面板")
         self.action_node_panel = self.menu_window.addAction(u"节点面板")
         self.action_user_panel = self.menu_window.addAction(u"用户页")
@@ -70,8 +72,6 @@ class MainView(QWidget):
         self.action_open_file = self.menu_file.addAction(u"打开文件")
 
         # 设置点击产生对号
-        self.action_file_panel.setCheckable(True)
-        self.action_file_panel.setChecked(True)
         self.action_node_panel.setCheckable(True)
         self.action_node_panel.setChecked(True)
         self.action_user_panel.setCheckable(True)
@@ -112,14 +112,12 @@ class MainController():
     #初始创建界面
     def setPanel(self):
         self.setUserPanel()
-        self.setTreeView()
         self.setViewPanel()
         self.setParmPanel()
         self.setNodePanel()
 
     #设置工具栏上的按钮与子窗口连接
     def setActionConnect(self):
-        self.view.action_file_panel.triggered.connect(self.setTreeView)
         self.view.action_node_panel.triggered.connect(self.setNodePanel)
         self.view.action_param_panel.triggered.connect(self.setParmPanel)
         self.view.action_user_panel.triggered.connect(self.setUserPanel)
@@ -128,21 +126,7 @@ class MainController():
         self.view.action_open_file.triggered.connect(self.openFile)
 
 
-    # 根据当前窗口是否存在大纲视图，不存在添加大纲视图，存在则删除大纲视图
-    def setTreeView(self):
-        self.treeView = self.view.ui.findChild(QDockWidget, "TreeView")
-     
-        if(self.treeView == None):
 
-            self.treeView = FileTree.FileTreeWindow()
-            self.view.ui.addDockWidget(Qt.LeftDockWidgetArea, self.treeView)
-          
-
-        else:
-            self.treeView.close()
-            self.view.ui.removeDockWidget(self.treeView)
-            del(self.treeView)
-            self.view.action_file_panel.setChecked(False)
 
     # 设置节点编辑面板
     def setNodePanel(self):
@@ -150,7 +134,7 @@ class MainController():
         if(self.nodePanel == None):
 
             self.nodePanel = NodePanel()
-            self.view.ui.addDockWidget(Qt.RightDockWidgetArea,self.nodePanel)
+            self.view.ui.addDockWidget(Qt.LeftDockWidgetArea,self.nodePanel)
 
         else:
             self.nodePanel.close()
@@ -207,7 +191,7 @@ class MainController():
         if(self.nodePanel == None):
 
             self.nodePanel = NodePanel()
-            self.view.ui.addDockWidget(Qt.RightDockWidgetArea,self.nodePanel)
+            self.view.ui.addDockWidget(Qt.LeftDockWidgetArea,self.nodePanel)
 
         else:
             self.nodePanel.close()
@@ -225,12 +209,7 @@ class MainController():
         self.userPanel = User.UserPanel()
         self.view.ui.addDockWidget(Qt.LeftDockWidgetArea, self.userPanel)
         
-        self.treeView = self.view.ui.findChild(QDockWidget, "TreeView") 
-        if(self.treeView != None):
-            self.treeView.close()
-            self.view.ui.removeDockWidget(self.treeView)
-        self.treeView = FileTree.FileTreeWindow()
-        self.view.ui.addDockWidget(Qt.LeftDockWidgetArea,self.treeView)
+     
             
         self.viewPanel = self.view.ui.findChild(QDockWidget, "ViewPanel") 
         if(self.viewPanel != None):
@@ -277,27 +256,33 @@ class MainController():
             # 创建标签选择窗口
             self.tagWidget = Tag.TagWidget(self.paths)
             self.tagWidget.show()
+            self.tagWidget.send_tag_signal.connect(self.cenWinAddTags) # 链接添加标签的信号到中心窗口添加标签方法
+            
+           
+    # 中心窗口添加新按钮
+    def cenWinAddTags(self, tags):
+        
+        # 获取新添加的标签
+        tags_add = tags.split(",")
 
-            if self.tagWidget.close():
-                tags_add = self.tagWidget.getNewtag() # 获取新添加的标签
-                self.setNewtag(tags_add)
+        for tag in tags_add:
+            
+            self.centerWindow.setTag(tag)
+
 
                 
                 
 
     # 设置窗口之间的信号连接
     def setWindowsConnect(self):
-        if self.treeView != None: # 设置大纲视图的按钮点击连接到中心窗口资源显示
-            self.treeView.load_center_signal.connect(self.centerWindow.addSource)
+        
 
         if self.viewPanel != None: # 设置中心窗口的按钮点击连接到视图窗口显示
             self.centerWindow.load_view_signal.connect(self.viewPanel.setView)
 
 
-    def setNewtag(self,tags):
-        print(tags)
 
-Col = MainController()
+
 
 
     

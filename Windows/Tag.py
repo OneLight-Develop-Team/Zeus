@@ -1,19 +1,22 @@
 ﻿
 
-from PySide2.QtWidgets import QWidget, QPushButton, QApplication, QHBoxLayout,QLineEdit
-from PySide2.QtUiTools import QUiLoader
-from PySide2.QtCore import Qt
-from Zeus.settings import GenImage
-from Zeus.Windows import layouitflow
+from Qt.QtWidgets import QWidget, QPushButton, QApplication, QHBoxLayout,QLineEdit
+from Qt.QtCompat import loadUi
+from Qt.QtCore import Qt,Signal
+
 import os,json
-reload(layouitflow)
-reload(GenImage)
+
 #获取当前文件所在路径
 current_path = os.path.dirname(os.path.abspath(__file__))
 
 file_path = os.path.dirname(current_path)
 
-
+try:
+    from Zeus.settings import GenImage
+    from Zeus.Windows import layouitflow
+except:
+    from settings import GenImage
+    from Windows import layouitflow
 
 class TagWidget(QWidget):
     """
@@ -21,7 +24,8 @@ class TagWidget(QWidget):
     参数：
         文件路径
     """
-    
+    send_tag_signal = Signal(str)
+
     def __init__(self,paths):
         super(TagWidget, self).__init__()
 
@@ -49,8 +53,8 @@ class TagWidget(QWidget):
 
 
         #加载ui,并设置ui界面
-        loader = QUiLoader()
-        self.ui = loader.load(file_path + "\\res\\UI\\TabWidegt.ui")
+        # loader = QUiLoader()
+        self.ui = loadUi(file_path + "\\res\\UI\\TabWidegt.ui")
         self.ui.setParent(self)
         
         #设置布局
@@ -78,8 +82,12 @@ class TagWidget(QWidget):
         
     # 确定按钮按下，保存标签数据，并保存文件数据
     def on_btnOK_clicked(self):
+
+        self.send_tag_signal.emit(self.getNewtags())  # 发送添加新的标签信号到主窗口
+        
         self.saveTags()
         self.saveFile()
+        
         self.close()
     
     # 取消按钮按下，关闭窗口
@@ -162,21 +170,32 @@ class TagWidget(QWidget):
 
         return tags
 
-    # 获取新标签
-    def getNewtag(self):
-        
-        tags = []  #获取已有标签列表
-        self.btn_tags = self.widget.findChildren(QPushButton)
+    # 获取新标签,并以一个字符串返回
+    def getNewtags(self):
 
+        tags = []  #获取已有标签列表
+
+        #加载标签数据到字典
+        with open(file_path + r"\res\temp\setting.json") as js:
+            setting_json = json.load(js)
+
+        if "Tags" not in setting_json.keys():
+            setting_json["Tags"] = []
+
+        tags = setting_json["Tags"]
+        
         # 获取新添加的标签
-        tags_add = self.lineEdit.text().split(",")
         tags_add = []
+        tags_add = self.lineEdit.text().split(",")
+        
+        tags_add_str = ""
 
         for tag in tags_add:
             if tag not in tags and tag != "": #如果新添加的标签已经选中或者空标签，则不添加到标签列表
-                tags_add.append(tag)
-                
-        return tags_add
+                tags_add_str += tag
+                tags_add_str += ","
+        
+        return tags_add_str
         
 
 
@@ -188,6 +207,7 @@ class TagBtn(QPushButton):
         self.setText(text)  
         self.tagName = text #标签名字
         self.isSelected = False  # 默认为不选择
+        
         self.clicked.connect(self.changeColor)
         self.setMinimumSize(100,50)
     

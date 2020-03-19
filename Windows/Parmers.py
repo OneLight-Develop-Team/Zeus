@@ -1,9 +1,12 @@
 ﻿# using utf-8
 
-from PySide2.QtWidgets import QWidget, QDockWidget
-from PySide2.QtCore import Qt
+from Qt.QtWidgets import QWidget, QDockWidget
+from Qt.QtCore import Qt
 
-from Zeus.settings.Setting import Data
+try:
+    from Zeus.settings.Setting import Data
+except:
+    from settings.Setting import Data
 class ParmerPanel(QDockWidget):
     """参数面板类"""
     def __init__(self):
@@ -23,4 +26,4 @@ class ParmerPanel(QDockWidget):
         self.widget.setMinimumSize(Data.getWindowWidth()/4,Data.getWindowHeight()/4)
         self.setWidget(self.widget)
 
-        self.setWindowTitle("参数面板")
+        self.setWindowTitle(u"参数面板")

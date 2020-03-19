@@ -1,12 +1,15 @@
 ﻿# using utf-8
 
-from PySide2.QtWidgets import QWidget, QDockWidget,QVBoxLayout,QPushButton,QLabel,QHBoxLayout
-from PySide2.QtCore import Qt
-from PySide2.QtUiTools import QUiLoader
-from PySide2.QtGui import QPixmap
+from Qt.QtWidgets import QWidget, QDockWidget,QVBoxLayout,QPushButton,QLabel,QHBoxLayout
+from Qt.QtCore import Qt
+from Qt.QtCompat import loadUi
+from Qt.QtGui import QPixmap
 
 # import houdiniPlay.Command as hc
-from Zeus.settings.Setting import Data
+try:
+    from Zeus.settings.Setting import Data
+except:
+    from settings.Setting import Data
 
 
 import os
@@ -51,7 +54,7 @@ class ViewPanel(QDockWidget):
         # self.widget.layout().addWidget(self.ui)
         # self.widget.layout().setContentsMargins(0,0,0,0)
 
-        self.setWindowTitle("视口")
+        self.setWindowTitle(u"视口")
 
     
         

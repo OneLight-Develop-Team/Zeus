@@ -1,7 +1,7 @@
 ﻿# <-- coding utf-8 -->
 
 
-from PySide2 import QtCore, QtGui,QtWidgets
+from Qt import QtCore, QtGui,QtWidgets
 
 
 class FlowLayout(QtWidgets.QLayout):
