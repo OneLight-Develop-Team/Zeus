@@ -2,6 +2,8 @@
 
 from Qt.QtWidgets import QWidget, QDockWidget,QPushButton,QHBoxLayout
 from Qt.QtCore import Qt
+from Zeus.NodeConnect import NodeGraphQt
+reload(NodeGraphQt)
 
 try:
     from Zeus.settings.Setting import Data
@@ -19,11 +21,17 @@ class NodePanel(QDockWidget):
       
     # 设置UI界面
     def setupUI(self):
-        # self.setStyleSheet("background-color:rgb(25,222,255)")
+      
         self.setFloating(False)
 
-        self.widget = QWidget()
-        self.widget.setMinimumSize(Data.getWindowWidth()/4,Data.getWindowHeight()/4)
+        self.nodeWidget = NodeGraphQt.BackWidget()
+       
+        self.nodeWidget.setMinimumSize(Data.getWindowWidth()/4,Data.getWindowHeight()/4)
 
-        self.setWidget(self.widget)
+        self.setWidget(self.nodeWidget)
         self.setWindowTitle(u"节点编辑器")
+
+
+
+    def getCenterSource(self):
+        return self.parent().parent().centerWindow.fileList

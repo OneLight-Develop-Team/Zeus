@@ -12,11 +12,14 @@ current_path = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.dirname(current_path)
 
 try:
-    from Zeus.settings import GenImage
+
     from Zeus.Windows import layouitflow
 except:
-    from settings import GenImage
+
     from Windows import layouitflow
+
+
+
 
 class TagWidget(QWidget):
     """
@@ -136,10 +139,6 @@ class TagWidget(QWidget):
             asset_json[path]["tags"] = tags  #保存文件标签
             
 
-            # 如果是图片数据，则生成缩略图，保存缩略图地址到json文件
-            if asset_json[path]["type"] == ".jpg" or asset_json[path]["type"] == ".jpeg" or asset_json[path]["type"] == ".png":
-                thumbnail_path = GenImage.make_thumb(path)
-                asset_json[path]["thumbnail"] =  thumbnail_path
 
 
 
@@ -147,7 +146,7 @@ class TagWidget(QWidget):
         with open(file_path + r"\res\temp\asset.json", 'w') as json_file:
             json.dump(asset_json, json_file, indent=4)
 
-        
+    
             
             
     

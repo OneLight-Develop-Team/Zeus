@@ -1,4 +1,4 @@
-﻿#coding=utf-8
+#coding=utf-8
 
 
 from PIL import Image 
@@ -8,7 +8,7 @@ import os
 current_path = os.path.dirname(os.path.abspath(__file__))
 file_path =  os.path.dirname(current_path)
 
-def make_thumb(path, size = 180):
+def make_thumb(path, size = 500):
     """
     缩略图生成程序
     size 参数传递要生成的尺寸
@@ -45,20 +45,21 @@ def make_thumb(path, size = 180):
         region = im.crop(box)
 
 
-    width /= float(height)
-    width *= size
-    
-    height = size
+
 
 
     filename = (path.split("/"))[-1]
 
-    savePath = file_path + r"\res\image\thumbnail"+"\\" + os.path.splitext(filename)[0] + ".jpg"
+    savePath = "C:\\Users\\huangPeiXin\\Desktop\\img3\\" + os.path.splitext(filename)[0] + ".jpg"
     # savePath = file_path + r"\res\images\thumbnail"  + "_" + "%sx%s" % (str(size), str(size)) + ".jpg"
-    thumb = region.resize((int(width),height), Image.ANTIALIAS)
+    thumb = region.resize((size,size), Image.ANTIALIAS)
     thumb.save(savePath, quality=75)  # 默认 JPEG 保存质量是 75, 可选值(0~100)
+    
     
     return savePath
 
-
-  
+if __name__ == "__main__":
+    filelist = os.listdir(r"C:\Users\huangPeiXin\Desktop\img")
+    for item in filelist:
+        make_thumb(r"C:\Users\huangPeiXin\Desktop\img/" + item)
+        

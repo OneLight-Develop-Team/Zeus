@@ -4,7 +4,7 @@ from Qt.QtWidgets import QWidget, QVBoxLayout, QPushButton, QRadioButton, QLineE
     QComboBox, QSlider, QTableWidget, QTableWidgetItem, QHeaderView,QToolButton
     
 from Qt.QtCompat import loadUi,setSectionResizeMode
-from Qt.QtCore import Signal, QRect, Qt
+from Qt.QtCore import Signal, QRect, Qt,QPoint
 from Qt import QtGui  
 
 
@@ -35,6 +35,10 @@ class CenterWindow(QWidget):
     """中心窗口类"""
 
     load_view_signal = Signal(str,str,str)
+    load_node_signal = Signal(list,list,list)
+    # load_node_signal = Signal()
+
+   
 
     def __init__(self):
 
@@ -67,6 +71,11 @@ class CenterWindow(QWidget):
         
         self.setTableWidget()
         self.toolButton.clicked.connect(self.showTableWidget)
+
+
+
+        
+
     # 设置UI界面
     def setupUI(self):
 
@@ -84,10 +93,17 @@ class CenterWindow(QWidget):
         self.layout().setContentsMargins(0,0,0,0)
 
 
-        self.widget = self.ui.findChild(QWidget,"widget")
+        self.child_widget = self.ui.findChild(QWidget, "widget")
         
+        # 设置选择窗口
+        self.widget = SelWidget()
+        layout = QVBoxLayout()
+        layout.setMargin(0)
+        self.child_widget.setLayout(layout)
+        self.child_widget.layout().addWidget(self.widget)
         self.flowLayout = layouitflow.FlowLayout()
         self.widget.setLayout(self.flowLayout)
+        self.widget.setDefaultColor()
 
     # Todo: 根据标签从数据库读取文件内容
     def addSource(self, tag):
@@ -117,7 +133,9 @@ class CenterWindow(QWidget):
                 self.fileList.append(key)
 
 
-              
+
+
+                
                
 
     
@@ -127,10 +145,10 @@ class CenterWindow(QWidget):
         
         myBtnWin = btnWin.btnWin(path,type,name)
 
-        myBtnWin.setMinimumSize(self.slider.value() + 100, self.slider.value() + 100)
         myBtnWin.setMaximumSize(self.slider.value() + 100, self.slider.value() + 100)
         
         myBtnWin.btn_clicked_signal.connect(self.setView)
+        
         self.widget.layout().addWidget(myBtnWin)
 
 
@@ -187,9 +205,7 @@ class CenterWindow(QWidget):
             key = self.fileList[dir_index[name]]
             self.addFile(key,asset_dir[key]["type"],asset_dir[key]["name"])
        
-
-   
-    
+       
     # 滑动Slider,改变按钮大小
     def changeBtnSize(self):
        
@@ -251,3 +267,125 @@ class CenterWindow(QWidget):
         else:
             self.tableWidget.setMaximumHeight(0)
             self.tableWidget_show = False
+
+
+        
+
+class SelWidget(QWidget):
+    """子中心窗口，用于处理鼠标事件"""
+
+    def __init__(self):
+        super(SelWidget,self).__init__()
+        
+        self.pos1 = [None,None]
+        self.pos2 = [None, None]
+        self.width = 0
+        self.height = 0
+        self.selectMore = False 
+        self.selectLess = False
+        self.setDefaultColor()
+
+        self.fileList = [] # 用于存储选择的文件路径
+ 
+    def setDefaultColor(self):
+        for btn in self.findChildren(btnWin.btnWin):
+            btn.setStyleSheet("QToolButton{border: 1.5px solid black;}")
+
+            self.fileList = []
+    
+    def paintEvent(self, event):
+        try:
+            self.width = self.pos2[0]-self.pos1[0]
+            self.height = self.pos2[1] - self.pos1[1]     
+            qp = QtGui.QPainter()
+            qp.begin(self)         
+            qp.fillRect(self.pos1[0], self.pos1[1], self.width, self.height, QtGui.QColor(10, 45, 45, 120))           
+      
+            qp.end()
+            
+        except:
+            pass
+        
+    
+    def mouseMoveEvent(self, event):
+        if(self.pos1[0] != None):
+            self.pos2[0], self.pos2[1] = event.pos().x(), event.pos().y()
+          
+            self.update()
+
+    def mousePressEvent(self, event):
+
+        self.pos1[0], self.pos1[1] = event.pos().x(), event.pos().y()
+
+
+    def mouseReleaseEvent(self, event):
+        if(self.pos1[0]!= None and self.pos2[0]!= None):
+            self.getSelect(self.pos1[0], self.pos1[1], self.pos2[0], self.pos2[1])
+            self.pos1[0],self.pos1[1] = None,None
+            self.pos2[0], self.pos2[1] = None,None
+
+            self.update()
+            
+
+    def getSelect(self, x1, y1, x2, y2):
+
+        if(self.selectMore == False):
+            for btn in self.findChildren(btnWin.btnWin):
+                btn.setStyleSheet("QToolButton{border: 1.5px solid black;}")
+                self.fileList = []
+
+        if (x1 > x2): x1, x2 = x2, x1
+        if (y1 > y2): y1, y2 = y2, y1
+        
+        rect = QRect(x1, y1, x2-x1, y2-y1)
+
+        for btn in self.findChildren(btnWin.btnWin):
+            if(self.IsInRect(btn,rect) and self.selectLess == False):
+                btn.setStyleSheet("QToolButton{border: 1.5px solid orange;}")
+                if (btn.path not in self.fileList):
+                    self.fileList.append(btn.path)
+                   
+            elif (self.IsInRect(btn, rect) and self.selectLess == True):
+                btn.setStyleSheet("QToolButton{border: 1.5px solid black;}")
+                if (btn.path in self.fileList):
+                    self.fileList.remove(btn.path)
+            
+                                                    
+    # 判断一个控件是否在矩形里面
+    def IsInRect(self, btn, rect):
+        topLeft = QPoint(btn.x(), btn.y())
+        bottomLeft = QPoint(btn.x(), btn.y() + btn.height())
+        topRight = QPoint(btn.x() + btn.width(), btn.y())
+        bottomRight = QPoint(btn.x() + btn.width(), btn.y() + btn.height())
+        if (self.PointInRect(topLeft, rect) or self.PointInRect(bottomLeft, rect) or \
+              self.PointInRect(topRight, rect) or self.PointInRect(bottomRight, rect)):
+              return True
+
+    # 判断一个点是否在矩形里面
+    def PointInRect(self, point, rect):
+        if point.x() > rect.topLeft().x() and point.x() < rect.bottomRight().x() and \
+            point.y() > rect.topLeft().y() and point.y() < rect.bottomRight().y():
+            return True
+
+        else:
+            return False
+
+
+    def setKey(self, key, bool):
+        if (key == "shift"):
+            if (bool):
+                self.selectMore = True
+            else:
+                self.selectMore = False
+
+        elif (key == "ctrl"):
+            if (bool):
+                self.selectLess = True
+            else:
+                self.selectLess = False
+
+    # 获取选择文件
+    def getFile(self):
+        
+           
+        return self.fileList

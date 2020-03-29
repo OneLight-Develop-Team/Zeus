@@ -67,14 +67,13 @@ class btnWin(QWidget):
         with open(file_path + r"\res\temp\asset.json") as js:
             asset_dir = json.load(js)
         
-        if "thumbnail" in asset_dir[path].keys(): #如果有缩略图，则加载缩略图
-            filePath = asset_dir[path]["thumbnail"]
+
 
 
 
         #根据图片类型设置图片
         if (type == ".jpg" or type == ".jpeg" or type == ".png"):
-            self.setPic(filePath)
+            self.setPic(path)
 
         elif (type == ".obj"):
             self.setObjPic()

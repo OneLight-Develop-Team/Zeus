@@ -27,3 +27,10 @@ class ParmerPanel(QDockWidget):
         self.setWidget(self.widget)
 
         self.setWindowTitle(u"参数面板")
+
+
+    def setParm(self, type, name, path):
+
+        print (type)
+        print (name)
+        print (path)

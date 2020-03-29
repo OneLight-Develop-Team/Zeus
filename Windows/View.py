@@ -5,6 +5,10 @@ from Qt.QtCore import Qt
 from Qt.QtCompat import loadUi
 from Qt.QtGui import QPixmap
 
+
+# from Zeus.CefWidget.CefWidget import CefBrowser
+# from Zeus.CefWidget.CefWidget import autoCefEmbed
+
 # import houdiniPlay.Command as hc
 try:
     from Zeus.settings.Setting import Data
@@ -21,6 +25,8 @@ import os
 
 class ViewPanel(QDockWidget):
     """视口界面"""
+
+   
     def __init__(self):
         super(ViewPanel, self).__init__()
 
@@ -28,12 +34,7 @@ class ViewPanel(QDockWidget):
         
         self.setupUI()
 
-        # self.label = self.ui.findChild(QLabel, "label")
-        # self.btnContain = self.ui.findChild(QWidget,"widget")
-        
-        # self.btnContain.setLayout(QHBoxLayout())
-        # # self.label.set
-
+      
        
 
     # 设置UI界面
@@ -42,9 +43,15 @@ class ViewPanel(QDockWidget):
         self.setFloating(False)
 
         self.widget = QWidget()
+
+       
+
+       
         self.widget.setMinimumSize(Data.getWindowWidth()/4,Data.getWindowHeight()/4)
-        self.widget.setLayout(QVBoxLayout())
+       
         self.setWidget(self.widget)
+
+
 
         # #加载ui,并设置ui界面
         # loader = QUiLoader()
@@ -110,13 +117,61 @@ class ViewPanel(QDockWidget):
             
     #         self.btnContain.layout().addWidget(btn_gplay)
 
-            
 
 
 
 
             
+"""
 
-            
-            
-            
+
+
+class TestWidget(QWidget):
+
+    @autoCefEmbed(468/5,url="https://www.baidu.com/")
+    def __init__(self, parent = None):
+        super(TestWidget, self).__init__(parent)
+       
+
+        self.view = CefBrowser(self)
+      
+        
+        m_vbox = QVBoxLayout()
+        # m_button = QPushButton("Change Url")
+        # m_button.clicked.connect(lambda:self.view.loadUrl(r"http://editor.l0v0.com/"))
+        # m_vbox.addWidget(m_button)
+
+        # m_button = QPushButton("Change Url2")
+        # m_button.clicked.connect(lambda:self.view.loadUrl(r"http://www.bing.com/"))
+        # m_vbox.addWidget(m_button)
+        
+        # m_button = QPushButton("Reload Url")
+        # m_button.clicked.connect(lambda:self.view.reload())
+        # m_vbox.addWidget(m_button)
+
+        # m_button = QPushButton("backNavigate Url")
+        # m_button.clicked.connect(lambda:self.view.goBack())
+        # m_vbox.addWidget(m_button)
+
+        # m_button = QPushButton("forwardNavigate Url")
+        # m_button.clicked.connect(lambda:self.view.goForward())
+        # m_vbox.addWidget(m_button)
+        
+        # m_button = QPushButton("get Url")
+        # m_button.clicked.connect(lambda:sys.stdout.write(self.view.getUrl()+"\n"))
+        # m_vbox.addWidget(m_button)
+
+        m_vbox.addWidget(self.view)
+
+      
+        container = QWidget()
+
+        container.setLayout(m_vbox)
+      
+
+        layout = QHBoxLayout()
+        layout.addWidget(container)
+
+        self.setLayout(layout)
+
+            """
