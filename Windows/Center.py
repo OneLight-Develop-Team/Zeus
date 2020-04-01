@@ -61,7 +61,8 @@ class CenterWindow(QWidget):
        
         self.slider =self.ui.findChild(QSlider,"horizontalSlider")
         self.tableWidget = self.ui.findChild(QTableWidget,"tableWidget")
-        self.toolButton = self.ui.findChild(QToolButton,"toolButton")
+        self.toolButton = self.ui.findChild(QToolButton, "toolButton")
+        self.toolButton_delTag = self.ui.findChild(QToolButton,"toolButton_2")
 
         self.searchBtn.clicked.connect(self.on_searchBtn_click)
 
@@ -71,7 +72,7 @@ class CenterWindow(QWidget):
         
         self.setTableWidget()
         self.toolButton.clicked.connect(self.showTableWidget)
-
+        self.toolButton_delTag.clicked.connect(self.deleteTag)
 
 
         
@@ -205,7 +206,11 @@ class CenterWindow(QWidget):
             key = self.fileList[dir_index[name]]
             self.addFile(key,asset_dir[key]["type"],asset_dir[key]["name"])
        
-       
+
+
+
+
+
     # 滑动Slider,改变按钮大小
     def changeBtnSize(self):
        
@@ -267,7 +272,51 @@ class CenterWindow(QWidget):
         else:
             self.tableWidget.setMaximumHeight(0)
             self.tableWidget_show = False
+    
+    # 删除标签
+    def deleteTag(self):
+        print(self.tag)
+        with open(file_path + r"\res\temp\setting.json") as js:
+            setting_json = json.load(js)
 
+        try:
+            setting_json["Tags"].remove(self.tag)
+        except:
+            return
+
+        self.tableWidget.clearContents()
+        
+        self.row, self.column = 0,0
+        # 根据标签添加按钮
+        for tag in setting_json["Tags"]:
+            
+            self.setTag(tag)
+
+        #写入标签数据到json文件中
+        with open(file_path + r"\res\temp\setting.json", 'w') as json_file:
+            json.dump(setting_json, json_file, indent=4)
+
+      
+        
+        #加载资产数据到字典
+        with open(file_path + r"\res\temp\asset.json") as js:
+            asset_json = json.load(js)
+
+        
+        #遍历打开的文件路径，加载到json中
+        for path in asset_json.keys():
+            if self.tag in asset_json[path]["tags"]:
+                asset_json[path]["tags"].remove(self.tag)
+
+        for path in asset_json.keys():
+            if asset_json[path]["tags"] == []:
+
+                del asset_json[path]
+
+
+        #写入标签数据到json文件中
+        with open(file_path + r"\res\temp\asset.json", 'w') as json_file:
+            json.dump(asset_json, json_file, indent=4)
 
         
 
@@ -389,3 +438,6 @@ class SelWidget(QWidget):
         
            
         return self.fileList
+
+
+   

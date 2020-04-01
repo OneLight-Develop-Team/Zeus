@@ -1,7 +1,7 @@
 ﻿# <-- coding utf-8 -->
 
 from Qt.QtWidgets import QVBoxLayout, QWidget, QMenu, QMainWindow, QDockWidget, QFileDialog, QFileSystemModel, \
-    QPushButton,QSpinBox,QLineEdit
+    QPushButton,QSpinBox,QLineEdit,QDoubleSpinBox
 from Qt.QtCompat import loadUi
 from Qt.QtCore import Qt,Signal
 
@@ -172,7 +172,7 @@ class MainModel():
         fileExport.setDisplayFlag(1)
         fileExport.parm("reload").pressButton()
 
-    def rename(self, filelist, path):
+    def rename(self, filelist, path,endName= ""):
         
         for file in filelist:
             if file.endswith('.jpg'):
@@ -190,7 +190,7 @@ class MainModel():
                 
 				src = os.path.join(os.path.abspath(path), item)
                
-				dst = os.path.join(os.path.abspath(path), '0000' + format(str(i), '0>3s') + '.jpg')
+				dst = os.path.join(os.path.abspath(path), endName + '0000' + format(str(i), '0>3s') + '.jpg')
 				os.rename(src, dst)
 				# print 'converting %s to %s ...' % (src, dst)
 				i = i + 1
@@ -202,10 +202,12 @@ class MainModel():
         size 参数传递要生成的尺寸
         返回缩略图地址
         """    
+
      
         try:  # 尝试打开文件
 
             im = Image.open(path)
+  
         except IOError:
             return
 
@@ -248,17 +250,52 @@ class MainModel():
 
         return savePath
         
-    def makevideo(self,path, fps):
+    def makevideo(self, files, path, name, width, high, fps):
         """ 将图片合成视频. path: 视频路径，fps: 帧率 """
-        fourcc = cv2.VideoWriter_fourcc(*"MJPG")
-        path1 = r'C:\Users\huangPeiXin\Desktop\img'
-        im = Image.open(r'C:\Users\huangPeiXin\Desktop\img\0000000.jpg')
-        print(im.size)
-        vw = cv2.VideoWriter(path, fourcc, fps, im.size)
-        for i in os.listdir(path1):
-            frame = cv2.imread(path1 +'/'+ i)
-            vw.write(frame)
-            print(i)
+        ZeusImagePath = path + "/" + "videoImageTemp"
+        if not os.path.exists(ZeusImagePath):     #判断当前路径是否存在，没有则创建new文件夹
+            os.makedirs(ZeusImagePath)
+        ZeusImageSizePath = path + "/" + "ZeusImageSizePath"
+        if not os.path.exists(ZeusImageSizePath):
+            os.makedirs(ZeusImageSizePath)
+
+        for file in files:
+            if file.endswith('.jpg'):
+                copyfile(file, ZeusImagePath + "/" + (file.split("/"))[-1])
+
+        filelist = os.listdir(ZeusImagePath)
+        i = 1
+
+        for item in filelist:
+            if item.endswith('.jpg'):
+                src = os.path.join(os.path.abspath(ZeusImagePath), item)
+                dst = os.path.join(os.path.abspath(ZeusImagePath), '0000' + format(str(i), '0>3s') + '.jpg')
+                os.rename(src, dst)
+                i = i + 1
+
+        filelist = os.listdir(ZeusImagePath)
+        i=0
+        for item in filelist:
+            
+            self.make_thumb(ZeusImagePath + "/" + item, ZeusImageSizePath, width, high, 50)
+            i = i+1
+            
+        command = file_path + r"\ffmpeg\bin\ffmpeg.exe -loop 1 -f image2 -i " \
+            + ZeusImageSizePath + r"\%007d.jpg -vcodec libx264 -r " + str(fps) + " -t "+str(fps*i)+ " "+ path + "\\" + name \
+            + ".mp4"
+        print(command)
+        os.system(command)
+
+        filelist = os.listdir(ZeusImagePath)
+        for item in filelist:
+            os.remove(ZeusImagePath + "\\" + item)  # path是文件的路径，如果这个路径是一个文件夹，则会抛出OSError的错误，这时需用用rmdir()来删除
+        os.rmdir(ZeusImagePath)  # path是文件夹路径，注意文件夹需要时空的才能被删除
+
+        filelist = os.listdir(ZeusImageSizePath)
+        for item in filelist:
+            os.remove(ZeusImageSizePath + "\\" + item)  # path是文件的路径，如果这个路径是一个文件夹，则会抛出OSError的错误，这时需用用rmdir()来删除
+        os.rmdir(ZeusImageSizePath)  # path是文件夹路径，注意文件夹需要时空的才能被删除
+
 class MainController():
     """主窗口连接类"""
     def __init__(self):
@@ -478,10 +515,12 @@ class MainController():
 
     def renamePic(self):
         self.picPath = ""
+        self.endName = ""
         # self.endName = ""
         self.renameWidget = RenameWidget()
         self.renameWidget.show()
         self.renameWidget.send_path_signal.connect(self.setRenamePath)
+        self.renameWidget.send_endName_signal.connect(self.setEndName)
         self.renameWidget.genteral_pic_signal.connect(self.rename)
         
 
@@ -494,12 +533,14 @@ class MainController():
     def setRenamePath(self,path):
         self.picPath = path
 
-
+    def setEndName(self,name):
+        self.endName = name
     def rename(self):
         if self.picPath != "":
-            self.model.rename(self.view.centerWindow.widget.getFile(),self.picPath)
+            self.model.rename(self.view.centerWindow.widget.getFile(),self.picPath,self.endName)
         self.picPath = ""
-        # self.endName = ""
+        self.endName = ""
+    
 
 
     def getThumb(self):
@@ -543,11 +584,39 @@ class MainController():
 
 
     def getVideo(self):
-        video_path = r'C:\Users\huangPeiXin\Desktop\img\test_new1.mp4'
-        
-        self.model.makevideo(video_path, 10)  # 图片转视频
+        self.video_path = ""
+        self.name = ""
+        self.video_width = 500
+        self.video_high = 500
+        self.fps = 1.0
+        self.videoWidget = VideoWidget()
 
+        self.videoWidget.send_path_signal.connect(self.setVideoPath)
+        self.videoWidget.send_name_signal.connect(self.setVideoName)
+        self.videoWidget.send_size_signal.connect(self.setVideoSize)
+        self.videoWidget.send_fps_signal.connect(self.setVideoFps)
+        self.videoWidget.genteral_video_signal.connect(self.genteralVideo)
+        self.videoWidget.show()
 
+    def setVideoPath(self,path):
+        self.video_path = path
+    
+    def setVideoName(self, name):
+        self.video_name = name
+    def setVideoSize(self, width,height):
+        self.video_width = width
+        self.video_high = height
+    def setVideoFps(self,fps):
+        self.fps = fps
+    
+    def genteralVideo(self):
+        if self.video_name != "" and self.video_path != "":
+            self.model.makevideo(self.view.centerWindow.widget.getFile(),self.video_path,self.video_name,self.video_width,self.video_high,self.fps)  # 图片转视频
+        self.video_name = ""
+        self.video_path = ""
+        self.video_width = 500
+        self.video_high = 500
+        self.fps = 1.0
 class LODWidget(QWidget):
 
     send_path_signal = Signal(str)
@@ -688,6 +757,8 @@ class RenameWidget(QWidget):
     
     send_path_signal = Signal(str)
 
+    send_endName_signal = Signal(str)
+
     def __init__(self):
         super(RenameWidget, self).__init__()
         
@@ -714,6 +785,7 @@ class RenameWidget(QWidget):
         self.btn_ok = self.ui.findChild(QPushButton, "pushButton_2")
         self.btn_cancel = self.ui.findChild(QPushButton, "pushButton_3")
         self.lineEdit = self.ui.findChild(QLineEdit,"lineEdit")
+        self.lineEdit_endName = self.ui.findChild(QLineEdit,"lineEdit_2")
 
         self.btn.clicked.connect(self.setSavePath)
         self.btn_ok.clicked.connect(self.on_btn_ok_click)
@@ -735,8 +807,88 @@ class RenameWidget(QWidget):
 
     def on_btn_ok_click(self):
         self.send_path_signal.emit(self.lineEdit.text())
+        self.send_endName_signal.emit(self.lineEdit_endName.text())
         self.genteral_pic_signal.emit()
       
+        self.close()
+
+    def on_btn_cancel_click(self):
+        self.close()
+
+
+
+
+class VideoWidget(QWidget):
+    """视频窗口"""
+    genteral_video_signal = Signal()
+    
+    send_path_signal = Signal(str)
+
+    send_name_signal = Signal(str)
+
+    send_fps_signal = Signal(float)
+    send_size_signal = Signal(int, int)
+
+    def __init__(self):
+        super(VideoWidget, self).__init__()
+        
+
+  
+    
+        self.setWindowModality(Qt.ApplicationModal)
+
+        self.ui = loadUi(file_path + "\\res\\UI\\Video.ui")
+        self.ui.setParent(self)
+
+        
+        #设置窗口名称
+        self.setWindowTitle(u"视频选择窗口")
+
+        #设置布局
+        self.setLayout(QVBoxLayout())
+        self.layout().addWidget(self.ui)
+        self.layout().setMargin(0)
+        self.setMinimumSize(Data.getWindowWidth()/5,Data.getWindowHeight()/5)
+        self.setMaximumSize(Data.getWindowWidth()/5,Data.getWindowHeight()/5)
+
+        self.btn = self.ui.findChild(QPushButton,"pushButton")
+        self.btn_ok = self.ui.findChild(QPushButton, "pushButton_2")
+        self.btn_cancel = self.ui.findChild(QPushButton, "pushButton_3")
+        self.lineEdit = self.ui.findChild(QLineEdit, "lineEdit")
+        self.lineEdit_name = self.ui.findChild(QLineEdit, "lineEdit_2")
+        self.spinbox_width = self.ui.findChild(QSpinBox, "spinBox")
+        self.spinbox_height = self.ui.findChild(QSpinBox, "spinBox_2")
+        self.spinbox_fps = self.ui.findChild(QDoubleSpinBox,"doubleSpinBox")
+
+        self.btn.clicked.connect(self.setSavePath)
+        self.btn_ok.clicked.connect(self.on_btn_ok_click)
+        self.btn_cancel.clicked.connect(self.on_btn_cancel_click)
+
+        
+        self.spinbox_width.setValue(500)
+        self.spinbox_height.setValue(500)
+        self.spinbox_fps.setValue(1.0)
+        
+            # 设置保存路径
+    def setSavePath(self):
+        dialog = QFileDialog() 
+        
+        
+        # self.path = dialog.getOpenFileName(self,'选择文件','')
+        self.path = dialog.getExistingDirectory(self,
+                                    "选取文件夹",
+                                    "C:/")                                 #起始路径
+        
+        self.lineEdit.setText(self.path)
+
+
+    def on_btn_ok_click(self):
+        self.send_path_signal.emit(self.lineEdit.text())
+        self.send_name_signal.emit(self.lineEdit_name.text())
+        self.send_size_signal.emit(self.spinbox_width.value(),self.spinbox_height.value())
+        self.send_fps_signal.emit(self.spinbox_fps.value())  
+        self.genteral_video_signal.emit()
+
         self.close()
 
     def on_btn_cancel_click(self):
