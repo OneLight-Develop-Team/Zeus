@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>504</width>
-    <height>342</height>
+    <width>443</width>
+    <height>367</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -475,7 +475,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
 }
 </string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,8,1">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,6,1">
    <item>
     <widget class="QSplitter" name="splitter">
      <property name="orientation">
@@ -507,8 +507,8 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>484</width>
-        <height>248</height>
+        <width>423</width>
+        <height>251</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">

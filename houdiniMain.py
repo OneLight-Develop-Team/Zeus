@@ -1,5 +1,9 @@
-from Windows import MainWindow
+﻿from Windows import MainWindow
+
 reload(MainWindow)
 
+Col = MainWindow.MainController()
 
-col = MainWindow.MainController()
+Col.view.showMaximized()
+
+

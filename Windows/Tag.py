@@ -1,23 +1,32 @@
-﻿
-
-from Qt.QtWidgets import QWidget, QPushButton, QApplication, QHBoxLayout,QLineEdit
+﻿from Qt.QtWidgets import QWidget, QPushButton, QApplication, QHBoxLayout,QLineEdit
+from Qt.QtCore import Qt, Signal
 from Qt.QtCompat import loadUi
-from Qt.QtCore import Qt,Signal
 
+
+import time
 import os,json
+import pymongo
+
+import Resource
+import layouitflow
+from settings.Setting import Data
+
+from dayu_widgets import dayu_theme
+
+#链接标签数据库
+client = pymongo.MongoClient("mongodb://localhost:27017/")
+tagdb = client["tagdb"]  #标签数据库
+tagcol = tagdb["tagcol"]  #标签集合
+
+#链接用户数据库
+userdb = client["userdb"]
+
+#链接标签文件数据库
+tagfiledb = client["tagFiledb"]  #标签文件数据库
 
 #获取当前文件所在路径
 current_path = os.path.dirname(os.path.abspath(__file__))
-
 file_path = os.path.dirname(current_path)
-
-try:
-
-    from Zeus.Windows import layouitflow
-except:
-
-    from Windows import layouitflow
-
 
 
 
@@ -28,11 +37,12 @@ class TagWidget(QWidget):
         文件路径
     """
     send_tag_signal = Signal(str)
-
-    def __init__(self,paths):
+    load_file_signal =Signal()
+    def __init__(self, paths, username):
         super(TagWidget, self).__init__()
 
         self.paths = paths  #文件路径列表
+        self.username = username  # 用户名
 
         self.setupUI()
         self.widget = self.ui.findChild(QWidget,"widget")
@@ -45,6 +55,7 @@ class TagWidget(QWidget):
 
         self.btn_ok.clicked.connect(self.on_btnOK_clicked)
         self.btn_cancel.clicked.connect(self.on_btnCancel_clicked)
+   
 
 
 
@@ -53,41 +64,35 @@ class TagWidget(QWidget):
 
         # 设置为模态对话框        
         self.setWindowModality(Qt.ApplicationModal)
+        self.setStyleSheet("background-color:#262626")
+        self.setMinimumSize(Data.getWindowWidth() / 3.5, Data.getWindowHeight() / 2)
+        
 
-
-        #加载ui,并设置ui界面
-        # loader = QUiLoader()
         self.ui = loadUi(file_path + "\\res\\UI\\TabWidegt.ui")
+
         self.ui.setParent(self)
         
         #设置布局
         self.setLayout(QHBoxLayout())
         self.layout().addWidget(self.ui)
         self.layout().setContentsMargins(0,0,0,0)
-
-    # Todo: 将读取标签数据，改到从数据库读取
-    # 从json文件里的Tags键读取已经有的标签,设置窗口的标签
+        
+    #  将读取标签数据，改到从数据库读取
     def setTags(self):
         self.widget.setLayout(layouitflow.FlowLayout())
         
-        #加载标签数据到字典
-        with open(file_path + r"\res\temp\setting.json") as js:
-            setting_json = json.load(js)
-
-        if "Tags" not in setting_json.keys():
-            setting_json["Tags"] = []
-        
+       
         # 根据标签数据添加标签按钮
-        for tag in setting_json["Tags"]:
+        for x in tagcol.find({}, {"Tag": 1}):
+            tag = x["Tag"]
             self.widget.layout().addWidget(TagBtn(tag))
-
 
         
     # 确定按钮按下，保存标签数据，并保存文件数据
     def on_btnOK_clicked(self):
-
+        self.load_file_signal.emit()
         self.send_tag_signal.emit(self.getNewtags())  # 发送添加新的标签信号到主窗口
-        
+
         self.saveTags()
         self.saveFile()
         
@@ -97,57 +102,50 @@ class TagWidget(QWidget):
     def on_btnCancel_clicked(self):
         self.close()
 
-    # Todo: 将保存的标签数据改到数据库
-    # 保存新添加的标签数据
+    # 保存的标签数据改到数据库
     def saveTags(self):
         tags_add = self.lineEdit.text().split(",")
+        if tags_add or tags_add == 0:   #标签存在或者标签为0的时候才会存入
+            # 保存新添加的标签
+            for tag in tags_add:  # 把单个标签取出
+                if tag != "":
+                    new = True
+                    for x in tagcol.find({}, {"Tag": 1}):  # 把数据库里的标签取出
+                        if tag == x["Tag"]:
+                            new = False
+                    if new:
+                        newTag = {"Tag": tag}
+                        tagcol.insert_one(newTag)
 
-        #加载标签数据到字典
-        with open(file_path + r"\res\temp\setting.json") as js:
-            setting_json = json.load(js)
-
-        if "Tags" not in setting_json.keys():
-            setting_json["Tags"] = []
-        
-        # 保存新添加的标签
-        for tag in tags_add:
-            if tag not in setting_json["Tags"] and tag != "": #如果新添加的标签已经存在或者空标签，则不添加到标签列表
-                setting_json["Tags"].append(tag)
-
-        #写入标签数据到json文件中
-        with open(file_path + r"\res\temp\setting.json", 'w') as json_file:
-            json.dump(setting_json, json_file, indent=4)
-
-
-    # Todo: 把保存的数据从json文件转换到数据库
-    # 保存图片数据
+      
+    # 保存数据
     def saveFile(self):
         
         tags = self.getTags()  #获取标签
-    
-
-        #加载资产数据到字典
-        with open(file_path + r"\res\temp\asset.json") as js:
-            asset_json = json.load(js)
-
-        #遍历打开的文件路径，加载到json中
         for path in self.paths:
-            asset_json[path] = {}  # 设置单个资产为一个字典
-            asset_json[path]["path"] = path  #保存地址
-            asset_json[path]["name"] = (path.split("/"))[-1]   #保存文件名
-            asset_json[path]["type"] = os.path.splitext(path)[-1]  #保存文件类型，后缀名
-            asset_json[path]["tags"] = tags  #保存文件标签
-            
+            Resource.uploadSaveBaseData(path, self.username, tags)#保存文件信息到数字资产库
+            #保存上传信息到用户信息库
+            self.saveFileInformationToUserdb(self.username, path)
+            #保存文件名到标签文件库中
+            # self.saveFileNameToTagFiledb(path, tags)
 
+           
 
+    def saveFileInformationToUserdb(self, username, docPath):
+        docName = (docPath.split("/"))[-1]  # 文件名
+        RTime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))  # 当前时间
 
+        col = userdb[username]
+        dict = {"Operation": "UploadFile", "Time": RTime, "FileName":docName}
+        col.insert_one(dict)
 
-        #写入标签数据到json文件中
-        with open(file_path + r"\res\temp\asset.json", 'w') as json_file:
-            json.dump(asset_json, json_file, indent=4)
+    def saveFileNameToTagFiledb(self, docPath, Tags):
+        docName = (docPath.split("/"))[-1]  # 文件名
 
-    
-            
+        for Tag in Tags:
+            col = tagfiledb[Tag]    #以标签名为集合名
+            dict = {"FileName": docName}
+            col.insert_one(dict)
             
     
     # 获取选择的标签数据，和新添加的标签
@@ -172,28 +170,19 @@ class TagWidget(QWidget):
     # 获取新标签,并以一个字符串返回
     def getNewtags(self):
 
-        tags = []  #获取已有标签列表
-
-        #加载标签数据到字典
-        with open(file_path + r"\res\temp\setting.json") as js:
-            setting_json = json.load(js)
-
-        if "Tags" not in setting_json.keys():
-            setting_json["Tags"] = []
-
-        tags = setting_json["Tags"]
         
         # 获取新添加的标签
         tags_add = []
         tags_add = self.lineEdit.text().split(",")
         
         tags_add_str = ""
-
-        for tag in tags_add:
-            if tag not in tags and tag != "": #如果新添加的标签已经选中或者空标签，则不添加到标签列表
+        
+        for tag in tags_add:     #如果新添加的标签已经选中或者空标签，则不添加到标签列表
+             
+            if tag.isspace() == False:
                 tags_add_str += tag
                 tags_add_str += ","
-        
+       
         return tags_add_str
         
 
@@ -222,3 +211,4 @@ class TagBtn(QPushButton):
             self.isSelected = True
 
 
+  
