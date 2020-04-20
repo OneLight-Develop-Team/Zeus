@@ -8,6 +8,7 @@ from Qt.QtCompat import loadUi, setSectionResizeMode
 
 import os, time
 import pymongo
+from CefWidget import CefBrowser
 
 
 
@@ -89,8 +90,9 @@ class ParmerPanel(QWidget):
         tab_card.addTab(self.label_filePic, u'预览图')
 
         # Todo 加载3d视口
-        self.model_widget = QWidget()
-        self.model_widget.setLayout(QVBoxLayout())
+        # self.model_widget = QWidget()
+        self.model_widget = CefBrowser(self,url="editor")
+        # self.model_widget.setLayout(QVBoxLayout())
         tab_card.addTab(self.model_widget, u'3D视口')
     
     
@@ -458,7 +460,10 @@ class ParmerPanel(QWidget):
             elif name.split(".")[-1] == "jpg" :
                 picpath.append(file + "/" + name)
 
-        self.model_widget.layout().addWidget(MLabel(modelpath))
+        # self.model_widget.layout().addWidget(MLabel(modelpath))
+        print modelpath
+        self.model_widget.loadAsset(modelpath)
+
     # 弹出信息提示窗口
     def slot_show_message(self, func, config):
         func(config, parent=self.parent())

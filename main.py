@@ -1,14 +1,24 @@
-﻿from Windows import MainWindow
-from Qt.QtWidgets import QApplication,QSplashScreen
+﻿import os
+import sys
+def addModulePath(MODULE):
+    MODULE = os.path.realpath(MODULE)
+    if MODULE not in sys.path:
+        sys.path.append(MODULE)
+
+addModulePath(os.path.join(__file__,"..","_vendor"))
+addModulePath(os.path.join(__file__,"..","_vendor","dayu_widgets"))
+addModulePath(os.path.join(__file__,"..","_vendor","dayu_path"))
+addModulePath(os.path.join(__file__,"..","_vendor","CefWidget"))
+
+import CefWidget
+
+from Windows import MainWindow
+from Qt.QtWidgets import QApplication,QSplashScreen,QLabel
 from Qt.QtGui import QPixmap, QImage
 from Qt.QtCore import QSize,Qt
-import sys
 import time
-import os
 from settings.Setting import Data
 filePath =  os.path.dirname(os.path.abspath(__file__))
-
-
 
 def runAnimation():
       # 开机动画
@@ -28,13 +38,17 @@ def runAnimation():
         time.sleep(0.01)
     splash.finish(Col.view)
 
+@CefWidget.autoInitialize
+def main():
+    app = QApplication([])
 
-if  __name__ == "__main__":
-    app = QApplication(sys.argv)
     Col = MainWindow.MainController()
 
     # runAnimation()
-    
+
     Col.view.showMaximized()
-    
+
     app.exec_()
+
+if  __name__ == "__main__":
+    main()

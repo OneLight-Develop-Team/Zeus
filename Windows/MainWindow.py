@@ -1,12 +1,13 @@
 ﻿# <-- coding utf-8 -->
 
+from Qt import QtCore
+from Qt import QtWidgets
+from Qt import QtGui
 from Qt.QtWidgets import QVBoxLayout, QMenu, QMainWindow, QDockWidget, QFileDialog, QFileSystemModel, \
      QMessageBox,QHBoxLayout,QToolBar,QPushButton
 from Qt.QtCompat import loadUi
 from Qt.QtCore import Qt
 from Qt.QtGui import QPixmap
-from Qt import QtCore
-from Qt import QtWidgets
 
 import Center
 import User
@@ -35,6 +36,7 @@ from dayu_widgets.drawer import MDrawer
 from dayu_widgets.push_button import MPushButton
 from dayu_widgets.qt import QFormLayout
 from dayu_widgets.line_edit import MLineEdit
+
 
 #链接数据库
 client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -76,16 +78,16 @@ class MainView(QWidget):
 
         # 最小化************气泡** ************
         self.exitOnClose = False
-        aMinimum = QtWidgets.QAction(QtWidgets.QIcon(), u"最小化到托盘", self)
+        aMinimum = QtWidgets.QAction(QtGui.QIcon(), u"最小化到托盘", self)
         #aMinimum.triggered.connect(self.menubar)
         #self.menu_window.addAction(aMinimum)
 
-        self.trayIcon = QtWidgets.QSystemTrayIcon(QtWidgets.QIcon(ICONPATH), self)
+        self.trayIcon = QtWidgets.QSystemTrayIcon(QtGui.QIcon(ICONPATH), self)
         #self.trayIcon.setContextMenu(self.menubar)
         self.trayIcon.activated.connect(self.trayIconActivated)
 
-        icon = QtWidgets.QIcon()
-        icon.addPixmap(QtWidgets.QPixmap(ICONPATH), QtWidgets.QIcon.Normal, QtWidgets.QIcon.Off)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(ICONPATH), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.setWindowIcon(icon)
         # self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
 
@@ -137,7 +139,7 @@ class MainView(QWidget):
     def trayIconActivated(self, reason):
         if reason in (QtWidgets.QSystemTrayIcon.Context, QtWidgets.QSystemTrayIcon.DoubleClick):
             self.setWindowState(QtCore.Qt.WindowNoState)
-            self.trayIcon.setIcon(QtWidgets.QIcon(ICONPATH))
+            self.trayIcon.setIcon(QtGui.QIcon(ICONPATH))
             self.show()
             self.raise_()
         else:
@@ -147,12 +149,11 @@ class MainView(QWidget):
 class MainController():
     """主窗口连接类"""
     def __init__(self):
-
+        
         self.view = MainView()
-    
         
         self.userName = None  #保存用户名称
-        self.hasLogin = False #是否已经登录
+        self.hasLogin = False  #是否已经登录
 
         self.setActionConnect()
         self.view.centerWindow.load_view_signal.connect(self.addDrawer)
@@ -239,13 +240,13 @@ class MainController():
 
 
     # 添加参数面板
+
     def addDrawer(self,type, name, path):
         if (self.userName == None):
             self.slot_show_message(MMessage.warning,u"请先登录账号")
             return
         self.parmerPanel = Parmers.ParmerPanel(self.userName)
         self.parmerPanel.setParam(type, name, path)
-        self.parmerPanel.setModelWidget(path)   #设置3d视图
         self.parmerPanel.send_message_signal.connect(self.setMessageBox)
         self.custom_widget = QWidget()
         custom_lay = QFormLayout()
@@ -260,10 +261,11 @@ class MainController():
         
         dayu_theme.apply(self.drawer)
 
-        
-        
         self.drawer.show()
-       
+
+        self.parmerPanel.model_widget.embed() 
+        self.parmerPanel.setModelWidget(path)   #设置3d视图
+        
     def setMessageBox(self, s, str_get):
         if (s == "warnning"):
             MMessage.warning(str_get, parent=self.view)
