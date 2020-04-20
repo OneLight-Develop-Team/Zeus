@@ -1,4 +1,3 @@
-.vscode/
-.history/
-
 *.py[cod]
+.vscode
+.history

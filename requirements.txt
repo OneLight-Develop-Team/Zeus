@@ -1,0 +1,3 @@
+cefpython
+opencv-python
+PySide
