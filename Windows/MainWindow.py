@@ -6,7 +6,7 @@ from Qt.QtCompat import loadUi
 from Qt.QtCore import Qt
 from Qt.QtGui import QPixmap
 from Qt import QtCore
-from PySide import QtGui
+from Qt import QtWidgets
 
 import Center
 import User
@@ -76,16 +76,16 @@ class MainView(QWidget):
 
         # 最小化************气泡** ************
         self.exitOnClose = False
-        aMinimum = QtGui.QAction(QtGui.QIcon(), u"最小化到托盘", self)
+        aMinimum = QtWidgets.QAction(QtWidgets.QIcon(), u"最小化到托盘", self)
         #aMinimum.triggered.connect(self.menubar)
         #self.menu_window.addAction(aMinimum)
 
-        self.trayIcon = QtGui.QSystemTrayIcon(QtGui.QIcon(ICONPATH), self)
+        self.trayIcon = QtWidgets.QSystemTrayIcon(QtWidgets.QIcon(ICONPATH), self)
         #self.trayIcon.setContextMenu(self.menubar)
         self.trayIcon.activated.connect(self.trayIconActivated)
 
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(ICONPATH), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon = QtWidgets.QIcon()
+        icon.addPixmap(QtWidgets.QPixmap(ICONPATH), QtWidgets.QIcon.Normal, QtWidgets.QIcon.Off)
         self.setWindowIcon(icon)
         # self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
 
@@ -135,9 +135,9 @@ class MainView(QWidget):
         self.hide()
 
     def trayIconActivated(self, reason):
-        if reason in (QtGui.QSystemTrayIcon.Context, QtGui.QSystemTrayIcon.DoubleClick):
+        if reason in (QtWidgets.QSystemTrayIcon.Context, QtWidgets.QSystemTrayIcon.DoubleClick):
             self.setWindowState(QtCore.Qt.WindowNoState)
-            self.trayIcon.setIcon(QtGui.QIcon(ICONPATH))
+            self.trayIcon.setIcon(QtWidgets.QIcon(ICONPATH))
             self.show()
             self.raise_()
         else:
