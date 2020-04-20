@@ -1,3 +1,6 @@
 [submodule "_vendor/dayu_widgets"]
 	path = _vendor/dayu_widgets
 	url = git@github.com:phenom-films/dayu_widgets.git
+[submodule "_vendor/dayu_path"]
+	path = _vendor/dayu_path
+	url = git@github.com:phenom-films/dayu_path.git
