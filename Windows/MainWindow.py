@@ -258,11 +258,14 @@ class MainController():
         self.drawer.layout().setContentsMargins(0,0,0,0)
         self.drawer.setFixedWidth(Data.getWindowWidth()/3)
         self.drawer.set_widget(self.custom_widget)
+        # self.drawer.layout().addWidget(self.custom_widget)
         
         dayu_theme.apply(self.drawer)
 
         self.drawer.show()
 
+        # self.parmerPanel.model_widget.setMinimumSize(Data.getWindowHeight()/3,Data.getWindowHeight()/3)
+        # self.view.centerWindow.layout().addWidget(self.parmerPanel.model_widget)
         self.parmerPanel.model_widget.embed() 
         self.parmerPanel.setModelWidget(path)   #设置3d视图
         

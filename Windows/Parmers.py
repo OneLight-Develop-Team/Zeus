@@ -461,7 +461,7 @@ class ParmerPanel(QWidget):
                 picpath.append(file + "/" + name)
 
         # self.model_widget.layout().addWidget(MLabel(modelpath))
-        print modelpath
+ 
         self.model_widget.loadAsset(modelpath)
 
     # 弹出信息提示窗口
