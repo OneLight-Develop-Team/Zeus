@@ -449,20 +449,25 @@ class ParmerPanel(QWidget):
     def setModelWidget(self, path):
 
         file = os.path.dirname(path)
-        modelpath = ""  # 存储模型文件
-        picpath = []  #存储贴图数据
+        tex_type = ['albedo','bump','roughness','specular','opacity','normal','displacement']
+        data = {}  #存储贴图数据
         
         for name in os.listdir(file):
             if name.split(".")[-1] == "obj" or name.split(".")[-1] == "fbx" :
-                modelpath = file + "/" + name
-                break
+                modelpath = os.path.join(file,name).replace("\\","/")
+                data["model"] = modelpath
                 
             elif name.split(".")[-1] == "jpg" :
-                picpath.append(file + "/" + name)
-
+                for typ in tex_type:
+                    _typ = "_%s." % typ
+                    if _typ in name.lower():
+                        data[typ] = os.path.join(file,name).replace("\\","/")
+                        break
+        import json
         # self.model_widget.layout().addWidget(MLabel(modelpath))
- 
-        self.model_widget.loadAsset(modelpath)
+        data = json.dumps(data)
+        print data
+        self.model_widget.loadAsset(data)
 
     # 弹出信息提示窗口
     def slot_show_message(self, func, config):
