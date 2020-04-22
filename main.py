@@ -3,7 +3,8 @@ import sys
 def addModulePath(MODULE):
     MODULE = os.path.realpath(MODULE)
     if MODULE not in sys.path:
-        sys.path.append(MODULE)
+        # sys.path.append(MODULE)
+        sys.path.insert(0,MODULE)
 
 addModulePath(os.path.join(__file__,"..","_vendor"))
 addModulePath(os.path.join(__file__,"..","_vendor","dayu_widgets"))
