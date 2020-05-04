@@ -22,6 +22,8 @@ from settings.Setting import Data
 filePath =  os.path.dirname(os.path.abspath(__file__))
 
 def runAnimation():
+
+    Col = MainWindow.MainController()
       # 开机动画
     splash = QSplashScreen()
     scale = 0.5
@@ -42,10 +44,10 @@ def runAnimation():
 @CefWidget.autoInitialize
 def main():
     app = QApplication([])
-
     Col = MainWindow.MainController()
+    
 
-    # runAnimation()
+    runAnimation()
 
     Col.view.showMaximized()
 
