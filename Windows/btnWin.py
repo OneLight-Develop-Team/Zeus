@@ -122,7 +122,7 @@ class btnWin(QWidget):
         self.btn_clicked_signal.emit(self.type, self.name, self.path)
         
  
-"""
+
     # 鼠标进入时显示信息窗口
     def enterEvent(self, event):
         
@@ -144,7 +144,7 @@ class btnWin(QWidget):
         self.btnInfoWidget.close()
      
         super(btnWin, self).leaveEvent(e)
-"""
+
 
 
 class BtnInfoWidget(QTextEdit):

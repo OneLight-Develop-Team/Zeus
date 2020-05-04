@@ -209,7 +209,7 @@ class CenterWindow(QWidget):
     # 设置标签
     def setTag(self, tag):
        
-        if(tag.isspace()==False):
+        if(tag.isspace()==False and tag !=""):
             newItem = QTableWidgetItem(tag)
             newItem.setTextAlignment(QtCore.Qt.AlignCenter)
             self.tableWidget.setItem(self.row, self.column, newItem)
@@ -230,7 +230,7 @@ class CenterWindow(QWidget):
                 except:
                     continue
       
-        if(tag.isspace()==False and tag not in tags):
+        if(tag.isspace()==False and tag not in tags and tag !=""):
             newItem = QTableWidgetItem(tag)
             newItem.setTextAlignment(QtCore.Qt.AlignCenter)
             self.tableWidget.setItem(self.row, self.column, newItem)
