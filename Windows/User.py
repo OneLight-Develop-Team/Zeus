@@ -183,11 +183,11 @@ class UserPanel(QWidget):
         self.line_edit_regedit_password = MLineEdit()
         self.line_edit_regedit_password2 = MLineEdit()
         self.switch_identity = MSwitch().large()
-        self.line_edit_email = MLineEdit()
+
 
         custom_lay.addRow(u' 选择头像:  ',self.btn_regedit_image)
         custom_lay.addRow(u' 账号名称:  ', self.line_edit_regedit_name)
-        custom_lay.addRow(u' 用户邮箱:  ', self.line_edit_email)
+ 
         custom_lay.addRow(u' 账号密码:  ', self.line_edit_regedit_password)
         custom_lay.addRow(u' 确认密码:  ', self.line_edit_regedit_password2)
         custom_lay.addRow(u' 管理权限： ', self.switch_identity)
@@ -290,7 +290,7 @@ class UserPanel(QWidget):
         self.username = self.line_edit_regedit_name.text()
         self.password = self.line_edit_regedit_password.text()
         self.rePassword = self.line_edit_regedit_password2.text()
-        self.emailPath = self.line_edit_email.text()
+ 
         self.key = None
 
         #判断是否输入信息
@@ -298,10 +298,7 @@ class UserPanel(QWidget):
             self.slot_show_message(MMessage.error, (u'请输入用户名！'))
             return 0
 
-        if not self.emailPath:
-            self.slot_show_message(MMessage.error, (u'请输入邮箱地址！'))
-            return 0
-
+     
         if not self.password:
             self.slot_show_message(MMessage.error,(u'请输入密码！'))
             return 0
@@ -338,7 +335,7 @@ class UserPanel(QWidget):
                     saveUsername(self.username)
                     savePassword(self.username, self.password)
                     saveUserID(self.username, "普通用户")
-                    saveEmail(self.emailPath)
+               
                     saveRegisterTime(self.username)
                     if self.imgPath:  # 如果设置了头像截图
                         saveHeadPorfile(self.username, self.imgPath)
@@ -479,9 +476,6 @@ def saveRegisterTime(username):
     dict = {"_id": "RegisterTime", "Time": RTime, "Operation":"Register"}
     col.insert_one(dict)
 
-#todo:保存邮箱地址
-def saveEmail(email):
-    print(email)
 
 #保存登陆时间
 def saveLoginTime(username):

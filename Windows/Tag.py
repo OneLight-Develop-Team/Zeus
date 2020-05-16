@@ -10,7 +10,7 @@ import pymongo
 import Resource
 import layouitflow
 from settings.Setting import Data
-from settings.SendEmail import sendEmail
+
 from dayu_widgets import dayu_theme
 
 #链接标签数据库
@@ -95,7 +95,7 @@ class TagWidget(QWidget):
 
         self.saveTags()
         self.saveFile()
-        sendEmail(self.username,self.paths)
+      
         self.close()
     
     # 取消按钮按下，关闭窗口
