@@ -1,12 +1,12 @@
 ﻿# using utf-8
 
-from Qt.QtWidgets import  QDockWidget, QVBoxLayout, QPushButton, QLineEdit, QHeaderView,\
+from PySide.QtGui import  QDockWidget, QVBoxLayout, QPushButton, QLineEdit, QHeaderView,\
     QLabel, QComboBox, QMessageBox, QRadioButton, QFileDialog, QSlider, QTableWidget,QTableWidgetItem,QHBoxLayout
 #from Qt.QtCompat import loadUi
-from Qt import QtCore, QtGui
-from Qt.QtCore import Qt
+from PySide import QtCore, QtGui
+from PySide.QtCore import Qt
 from Qt.QtCompat import loadUi,setSectionResizeMode
-from Qt.QtGui import QIcon
+from PySide.QtGui import QIcon
 
 import os
 

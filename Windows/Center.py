@@ -1,10 +1,10 @@
 ﻿# <-- coding utf-8 -->
 
-from Qt.QtWidgets import QWidget, QVBoxLayout, QPushButton, QRadioButton, QLineEdit, \
+from PySide.QtGui import QWidget, QVBoxLayout, QPushButton, QRadioButton, QLineEdit, \
     QComboBox, QSlider, QTableWidget, QTableWidgetItem, QHeaderView, QToolButton,QHBoxLayout
-from Qt.QtCore import Signal, QRect, QPoint
-from Qt import QtCore
-from Qt import QtGui
+from PySide.QtCore import Signal, QRect, QPoint
+from PySide import QtGui
+from PySide import QtCore
 from Qt.QtCompat import loadUi,setSectionResizeMode
 
 import layouitflow

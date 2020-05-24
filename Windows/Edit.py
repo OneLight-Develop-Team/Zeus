@@ -2,7 +2,7 @@
 import os
 from settings.Setting import Data
 
-from Qt.QtGui import QIntValidator
+from PySide.QtGui import QIntValidator
 from dayu_widgets.divider import MDivider
 from dayu_widgets.label import MLabel
 from dayu_widgets.line_tab_widget import MLineTabWidget
@@ -12,7 +12,7 @@ from dayu_widgets.browser import MClickBrowserFolderToolButton
 from dayu_widgets.push_button import MPushButton
 from dayu_widgets import dayu_theme
 
-from Qt.QtCore import Signal
+from PySide.QtCore import Signal
 class EditWidget(QWidget):
     send_message_signal = Signal(str,str)
     def __init__(self, paths,parent=None):

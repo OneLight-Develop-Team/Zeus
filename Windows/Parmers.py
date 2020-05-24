@@ -1,9 +1,9 @@
 ﻿# using utf-8
-from Qt.QtGui import QPixmap
-from Qt.QtWidgets import QWidget, QDockWidget, QLabel, QPushButton, QLineEdit, QTableWidget, \
+from PySide.QtGui import QPixmap
+from PySide.QtGui import QWidget, QDockWidget, QLabel, QPushButton, QLineEdit, QTableWidget, \
     QMessageBox,QTableWidgetItem,QHeaderView,QVBoxLayout,QFrame
-from Qt.QtCore import Qt,Signal
-from Qt.QtCore import QPropertyAnimation, QSize
+from PySide.QtCore import Qt,Signal
+from PySide.QtCore import QPropertyAnimation, QSize
 from Qt.QtCompat import loadUi, setSectionResizeMode
 
 import os, time

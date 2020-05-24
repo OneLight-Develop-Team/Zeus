@@ -1,13 +1,12 @@
 ﻿# <-- coding utf-8 -->
 
-from Qt import QtCore
-from Qt import QtWidgets
-from Qt import QtGui
-from Qt.QtWidgets import QVBoxLayout, QMenu, QMainWindow, QDockWidget, QFileDialog, QFileSystemModel, \
+from PySide import QtGui
+from PySide import QtCore
+from PySide.QtGui import QVBoxLayout, QMenu, QMainWindow, QDockWidget, QFileDialog, QFileSystemModel, \
      QMessageBox,QHBoxLayout,QToolBar,QPushButton
 from Qt.QtCompat import loadUi
-from Qt.QtCore import Qt
-from Qt.QtGui import QPixmap
+from PySide.QtCore import Qt
+from PySide.QtGui import QPixmap
 
 import Center
 import User
@@ -78,11 +77,11 @@ class MainView(QWidget):
 
         # 最小化************气泡** ************
         self.exitOnClose = False
-        aMinimum = QtWidgets.QAction(QtGui.QIcon(), u"最小化到托盘", self)
+        aMinimum = QtGui.QAction(QtGui.QIcon(), u"最小化到托盘", self)
         #aMinimum.triggered.connect(self.menubar)
         #self.menu_window.addAction(aMinimum)
 
-        self.trayIcon = QtWidgets.QSystemTrayIcon(QtGui.QIcon(ICONPATH), self)
+        self.trayIcon = QtGui.QSystemTrayIcon(QtGui.QIcon(ICONPATH), self)
         #self.trayIcon.setContextMenu(self.menubar)
         self.trayIcon.activated.connect(self.trayIconActivated)
 
@@ -137,7 +136,7 @@ class MainView(QWidget):
         self.hide()
 
     def trayIconActivated(self, reason):
-        if reason in (QtWidgets.QSystemTrayIcon.Context, QtWidgets.QSystemTrayIcon.DoubleClick):
+        if reason in (QtGui.QSystemTrayIcon.Context, QtGui.QSystemTrayIcon.DoubleClick):
             self.setWindowState(QtCore.Qt.WindowNoState)
             self.trayIcon.setIcon(QtGui.QIcon(ICONPATH))
             self.show()

@@ -1,5 +1,5 @@
-﻿from Qt.QtWidgets import QWidget, QPushButton, QApplication, QHBoxLayout,QLineEdit
-from Qt.QtCore import Qt, Signal
+﻿from PySide.QtGui import QWidget, QPushButton, QApplication, QHBoxLayout,QLineEdit
+from PySide.QtCore import Qt, Signal
 from Qt.QtCompat import loadUi
 
 

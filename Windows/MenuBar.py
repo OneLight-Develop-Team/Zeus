@@ -1,5 +1,5 @@
-﻿from Qt.QtGui import QPixmap
-from Qt.QtCore import Signal
+﻿from PySide.QtGui import QPixmap
+from PySide.QtCore import Signal
 import os
 import functools
 

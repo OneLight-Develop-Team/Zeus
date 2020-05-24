@@ -1,10 +1,10 @@
-﻿from Qt.QtGui import QPixmap
-from Qt.QtWidgets import QWidget, QVBoxLayout, QToolButton, QTextEdit,QLabel
+﻿from PySide.QtGui import QPixmap
+from PySide.QtGui import QWidget, QVBoxLayout, QToolButton, QTextEdit,QLabel
 from Qt.QtCompat import loadUi
 
 
-from Qt.QtCore import Slot, Signal, Qt, QEvent
-from Qt.QtGui import QCursor
+from PySide.QtCore import Slot, Signal, Qt, QEvent
+from PySide.QtGui import QCursor
 import os
 
 

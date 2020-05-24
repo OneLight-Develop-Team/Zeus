@@ -6,17 +6,43 @@ def addModulePath(MODULE):
         # sys.path.append(MODULE)
         sys.path.insert(0,MODULE)
 
+
 addModulePath(os.path.join(__file__,"..","_vendor"))
-addModulePath(os.path.join(__file__,"..","_vendor","dayu_widgets"))
-addModulePath(os.path.join(__file__,"..","_vendor","dayu_path"))
-addModulePath(os.path.join(__file__,"..","_vendor","CefWidget"))
+# addModulePath(os.path.join(__file__,"..","_vendor","dayu_widgets"))
+# addModulePath(os.path.join(__file__,"..","_vendor","dayu_path"))
+# addModulePath(os.path.join(__file__,"..","_vendor","CefWidget"))
+
+import time
+import uuid
+import json
+import shutil
+import signal
+import ctypes
+import socket
+import platform
+import subprocess
+from functools import wraps
 
 import CefWidget
+import pymongo
+import cv2
+from PIL import Image
 
+from PySide.QtSvg import QSvgRenderer
+from PySide.QtGui import QApplication,QSplashScreen,QLabel
+from PySide.QtGui import QPixmap, QImage
+from PySide.QtCore import QSize,Qt
+from PySide import QtUiTools
+from PySide import QtXml
+from PySide import QtCore
+from PySide import QtGui
+from PySide import QtSvg
+from PySide import *
+from PySide.QtGui import *
+from PySide.QtCore import *
+import PySide
 from Windows import MainWindow
-from Qt.QtWidgets import QApplication,QSplashScreen,QLabel
-from Qt.QtGui import QPixmap, QImage
-from Qt.QtCore import QSize,Qt
+
 import time
 from settings.Setting import Data
 filePath =  os.path.dirname(os.path.abspath(__file__))

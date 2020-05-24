@@ -1,6 +1,6 @@
 ﻿# <-- coding utf-8 -->
 
-from Qt.QtWidgets import QApplication
+from PySide.QtGui import QApplication
 
 
 class Data():

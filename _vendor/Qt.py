@@ -18,14 +18,14 @@ DOCUMENTATION
 
     Usage:
         >> import sys
-        >> from Qt import QtWidgets
+        >> from PySide import QtGui
         >> app = QtWidgets.QApplication(sys.argv)
         >> button = QtWidgets.QPushButton("Hello World")
         >> button.show()
         >> app.exec_()
 
     All members of PySide2 are mapped from other bindings, should they exist.
-    If no equivalent member exist, it is excluded from Qt.py and inaccessible.
+    If no equivalent member exist, it is excluded from PySide.py and inaccessible.
     The idea is to highlight members that exist across all supported binding,
     and guarantee that code that runs on one binding runs on all others.
 
@@ -45,7 +45,7 @@ import shutil
 
 __version__ = "1.2.0.b2"
 
-# Enable support for `from Qt import *`
+# Enable support for `from PySide import *`
 __all__ = []
 
 # Flags from environment variables
@@ -1127,7 +1127,7 @@ _compatibility_members = {
 
 def _apply_site_config():
     try:
-        import QtSiteConfig
+        import PySideSiteConfig
     except ImportError:
         # If no QtSiteConfig module found, no modifications
         # to _common_members are needed.
@@ -1273,7 +1273,7 @@ def _build_compatibility_members(binding, decorators=None):
     # Allow optional site-level customization of the compatibility members.
     # This method does not need to be implemented in QtSiteConfig.
     try:
-        import QtSiteConfig
+        import PySideSiteConfig
     except ImportError:
         pass
     else:
@@ -1566,7 +1566,7 @@ def _convert(lines):
     """
 
     def parse(line):
-        line = line.replace("from PySide2 import", "from Qt import QtCompat,")
+        line = line.replace("from PySide2 import", "from PySide import PySideCompat,")
         line = line.replace("QtWidgets.QApplication.translate",
                             "QtCompat.translate")
         if "QtCore.SIGNAL" in line:
@@ -1692,7 +1692,7 @@ def _install():
         __all__.append(name)
 
         # Enable direct import of submodule,
-        # e.g. import Qt.QtCore
+        # e.g. import PySide.QtCore
         sys.modules[__name__ + "." + name] = our_submodule
 
         for member in members:
